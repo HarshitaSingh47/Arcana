@@ -1,6 +1,7 @@
 .idea
 .sass-cache
 .settings
+bin
 bower_components
 
 # Logs
@@ -78,6 +79,6 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
-.idea/workspace.xml
-public/js/**/*.js
-public/css/**/*.js
+public/js
+public/css
+public/index.html
