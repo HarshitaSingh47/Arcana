@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-COMPATIBLE" />
+        <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0" />
+        <title>Arcana - A CCG for the web!</title>
+        <link type="text/css" rel="stylesheet" href="css/vendor.min.css" />
+        <link type="text/css" rel="stylesheet" href="css/themify-icons.min.css" />
+        <link type="text/css" rel="stylesheet" href="css/styles.min.css" />
+        <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,600,300,700">
+    </head>
+    <body data-ng-app="arcana" id="app" class="app" data-custom-page>
+        <section data-ng-include="'app/layout/header.html'" id="header" class="header-container bg-dark header-fixed"></section>
+        <div class="main-container">
+            <div id="content" class="content-container">
+                <section data-ng-view class="view-container animate-fade-up"></section>
+            </div>
+        </div>
+        <script type="text/javascript" src="js/vendor.min.js"></script>
+        <script type="text/javascript" src="js/app.min.js"></script>
+    </body>
+</html>

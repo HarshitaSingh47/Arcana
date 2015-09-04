@@ -1,0 +1,58 @@
+<div class="page-signup">
+    <div class="signin-header">
+        <section class="logo text-center">
+            <h1><a href="#/">Arcana</a></h1>
+        </section>
+    </div>
+    <div class="signup-body">
+        <div class="container">
+            <div class="form-container">
+                <section>
+                    <div class="alert alert-danger" data-ng-show="vm.errorMessage !== ''">
+                        <span class="text-small">{{ vm.errorMessage }}</span>
+                    </div>
+                    <form name="registerForm" class="form-horiztonal text-center form-validation" novalidate data-ng-submit="vm.register()">
+                        <div class="form-group">
+                            <div class="input-group input-group-first">
+                                <span class="input-group-addon">
+                                    <span class="ti-user"></span>
+                                </span>
+                                <input type="text" class="form-control input-lg" data-ng-model="vm.username" placeholder="Username" required />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <span class="ti-email"></span>
+                                </span>
+                                <input type="email" class="form-control input-lg" data-ng-model="vm.emailAddress" placeholder="Email Address" required />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <span class="ti-lock"></span>
+                                </span>
+                                <input type="password" class="form-control input-lg" data-ng-model="vm.password" placeholder="Password" required />
+                            </div>
+                        </div>
+                        <div class="divider divider-lg"></div>
+                        <div class="form-group">
+                            <p class="additional-info text-small">
+                                By clicking on register, you agree to the <a href="javascript:;">terms & conditions</a> and <a href="javascript:;">privacy policy</a>.
+                            </p>
+                            <div class="divider"></div>
+                            <button type="submit" class="btn btn-primary btn-block btn-large" data-ng-disabled="!registerForm.$valid">Register</button>
+                        </div>
+                    </form>
+                </section>
+                <div class="divider"></div>
+                <section class="additional-info">
+                    <p class="text-right">
+                        <a href="#/login">Log In</a>
+                    </p>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>

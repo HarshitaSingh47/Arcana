@@ -1,0 +1,80 @@
+<div class="modal-header">
+    <button type="button" class="close" data-ng-click="vm.cancel()"><span aria-hidden="true">&times;</span></button>
+    <h3 class="modal-title">{{ vm.title }}</h3>
+</div>
+<div class="modal-body">
+    <form role="form" name="updateCardForm" class="form-horizontal" novalidate data-ng-submit="vm.submit()">
+        <div class="form-group">
+            <label for="cardName" class="col-sm-4 control-label">Card Name:</label>
+            <div class="col-sm-8">
+                <input type="text" id="cardName" name="cardName" class="form-control" data-ng-model="vm.card.cardName" placeholder="Enter Card Name..." required />
+            </div>
+        </div>
+        <div class="form-group" data-ng-show="vm.cardType === 'Creature'">
+            <label for="creatureType" class="col-sm-4 control-label">Creature Type:</label>
+            <div class="col-sm-8">
+                <select id="creatureType" name="creatureType" class="form-control" data-ng-model="vm.card.creatureType" data-ng-options="creatureType for creatureType in vm.creatureTypes"></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="cardRarity" class="col-sm-4 control-label">Rarity</label>
+            <div class="col-sm-8">
+                <select id="cardRarity" name="cardRarity" class="form-control" data-ng-model="vm.card.rarity" data-ng-options="rarity for rarity in vm.rarities"></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="instanceCost" class="col-sm-4 control-label">Instance Cost:</label>
+            <div class="col-sm-1">
+                <input type="text" id="instanceCost" name="instanceCost" class="form-control input-round" data-ng-model="vm.card.instanceCost" style="width: 45px;" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="maintenanceCost" class="col-sm-4 control-label">Maintenance Cost:</label>
+            <div class="col-sm-1">
+                <input type="text" id="maintenanceCost" name="maintenanceCost" class="form-control input-round" data-ng-model="vm.card.maintenanceCost" style="width: 45px;" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="genValue" class="col-sm-4 control-label">Gen Value:</label>
+            <div class="col-sm-1">
+                <input type="text" id="genValue" name="genValue" class="form-control input-round" data-ng-model="vm.card.genValue" style="width: 45px;" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="burnValue" class="col-sm-4 control-label">Burn Value:</label>
+            <div class="col-sm-1">
+                <input type="text" id="burnValue" name="burnValue" class="form-control input-round" data-ng-model="vm.card.burnValue" style="width: 45px;" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="health" class="col-sm-4 control-label">Health:</label>
+            <div class="col-sm-1">
+                <input type="text" id="health" name="health" class="form-control input-round" data-ng-model="vm.card.health" style="width: 45px;" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="power" class="col-sm-4 control-label">Power:</label>
+            <div class="col-sm-1">
+                <input type="text" id="power" name="power" class="form-control input-round" data-ng-model="vm.card.power" style="width: 45px;" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="description" class="col-sm-4 control-label">Description:</label>
+            <div class="col-sm-8">
+                <textarea id="description" name="description" class="form-control" data-ng-model="vm.card.description" style="resize: none;"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="flavorText" class="col-sm-4 control-label">Flavor Text:</label>
+            <div class="col-sm-8">
+                <textarea id="flavorText" name="flavorText" class="form-control" data-ng-model="vm.card.flavorText" style="resize: none;"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-8">
+                <button type="submit" class="btn btn-sm btn-primary" data-ng-disabled="!updateCardForm.$valid">Update Card</button> &nbsp;
+                <input type="button" class="btn btn-sm btn-default" value="Cancel" data-ng-click="vm.cancel()" />
+            </div>
+        </div>
+    </form>
+</div>

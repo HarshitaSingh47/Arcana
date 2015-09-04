@@ -1,0 +1,24 @@
+<div class="page page-table">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <strong>Cards</strong> &nbsp;
+            <a class="label label-info" data-ng-click="vm.addCard()">Add New Card</a>
+        </div>
+        <div class="panel-body">
+            <tabset>
+                <tab heading="Battery">
+                    <div data-ng-include="'/app/admin/cards/battery/cards.html'"></div>
+                </tab>
+                <tab heading="Creature">
+                    <div data-ng-include="'/app/admin/cards/creature/cards.html'"></div>
+                </tab>
+                <tab heading="Modifier">
+                    <div data-ng-include="'/app/admin/cards/modifier/cards.html'"></div>
+                </tab>
+                <tab heading="Sorcery">
+                    <div data-ng-include="'/app/admin/cards/sorcery/cards.html'"></div>
+                </tab>
+            </tabset>
+        </div>
+    </div>
+</div>
