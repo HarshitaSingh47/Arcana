@@ -27,24 +27,6 @@
             });
         };
 
-        batteryCardsCtrl.copyCard = function (cardId) {
-            $fireabaseObject(fbRef.child(cardId)).$loaded(function (data) {
-                $modal.open({
-                    templateUrl: '/app/admin/cards/adminCopyCard.html',
-                    controller: 'adminCopyCard',
-                    controllerAs: 'vm',
-                    resolve: {
-                        card: function () {
-                            return data;
-                        },
-                        cardType: function () {
-                            return 'Battery';
-                        }
-                    }
-                });
-            });
-        };
-
         batteryCardsCtrl.deleteCard = function (cardId) {
             $firebaseObject(fbRef.child(cardId)).$remove();
         };
