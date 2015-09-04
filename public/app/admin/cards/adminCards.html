@@ -2,23 +2,21 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <strong>Cards</strong> &nbsp;
-            <a class="label label-info" data-ng-click="vm.addCard()">Add New Card</a>
+            <a class="label label-success" data-ng-click="vm.addCard()">Add New Card</a>
         </div>
         <div class="panel-body">
-            <tabset>
-                <tab heading="Battery">
-                    <div data-ng-include="'/app/admin/cards/battery/cards.html'"></div>
-                </tab>
-                <tab heading="Creature">
-                    <div data-ng-include="'/app/admin/cards/creature/cards.html'"></div>
-                </tab>
-                <tab heading="Modifier">
-                    <div data-ng-include="'/app/admin/cards/modifier/cards.html'"></div>
-                </tab>
-                <tab heading="Sorcery">
-                    <div data-ng-include="'/app/admin/cards/sorcery/cards.html'"></div>
-                </tab>
-            </tabset>
+            <div class="col-lg-12">
+                <button type="button" class="btn btn-sm btn-info" data-ng-click="vm.showCards('Battery')">Battery</button>
+                <button type="button" class="btn btn-sm btn-info" data-ng-click="vm.showCards('Creature')">Creature</button>
+                <button type="button" class="btn btn-sm btn-info" data-ng-click="vm.showCards('Modifier')">Modifier</button>
+                <button type="button" class="btn btn-sm btn-info" data-ng-click="vm.showCards('Sorcery')">Sorcery</button>
+            </div>
+            <div class="col-lg-12" style="margin-top: 10px!important;">
+                <div data-ng-include="'/app/admin/cards/battery/cards.html'" data-ng-if="vm.cardType === 'Battery'"></div>
+                <div data-ng-include="'/app/admin/cards/creature/cards.html'" data-ng-if="vm.cardType === 'Creature'"></div>
+                <div data-ng-include="'/app/admin/cards/modifier/cards.html'" data-ng-if="vm.cardType === 'Modifier'"></div>
+                <div data-ng-include="'/app/admin/cards/sorcery/cards.html'" data-ng-if="vm.cardType === 'Sorcery'"></div>
+            </div>
         </div>
     </div>
 </div>

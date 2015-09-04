@@ -1,13 +1,14 @@
 (function () {
     'use strict';
 
-    function adminAddCard($modalInstance, $firebaseArray, FIREBASE_URL) {
+    function adminAddCard($modalInstance, $firebaseArray, FIREBASE_URL, cardType) {
         var vm = this,
             fbRef = new Firebase(FIREBASE_URL + '/cards');
 
         vm.card = {
             cardName: '',
-            cardType: 'Battery',
+            cardType: cardType,
+            creatureType: 'Organic',
             rarity: 'Normal',
             instanceCost: 0,
             maintenanceCost: 0,
@@ -27,6 +28,12 @@
             /*jslint nomen:true*/
             var cardRef = fbRef.child(vm.card.cardType.toLowerCase()),
                 card = _.pick(vm.card, ['cardName', 'rarity', 'instanceCost', 'maintenanceCost', 'genValue', 'burnValue', 'health', 'power', 'description', 'flavorText']);
+
+            // TODO: This needs to get refactored somehow
+            if (vm.card.cardType === 'Creature') {
+                card.creatureType = vm.card.creatureType;
+            }
+
             /*jslint nomen:false*/
             $firebaseArray(cardRef).$add(card).then(function () {
                 $modalInstance.close();
@@ -37,7 +44,7 @@
             $modalInstance.close();
         };
     }
-    adminAddCard.$inject = ['$modalInstance', '$firebaseArray', 'FIREBASE_URL'];
+    adminAddCard.$inject = ['$modalInstance', '$firebaseArray', 'FIREBASE_URL', 'cardType'];
 
     angular.module('arcana').controller('adminAddCard', adminAddCard);
 }());

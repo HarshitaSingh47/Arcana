@@ -55,7 +55,8 @@ gulp.task('lint', function () {
         .pipe(jslint({
             global: ['angular', 'Firebase', 'ASQ', '_'],
             white: true,
-            unparam: true
+            unparam: true,
+            todo: true
         }));
 });
 

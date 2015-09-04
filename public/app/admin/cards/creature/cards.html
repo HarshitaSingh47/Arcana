@@ -1,0 +1,38 @@
+<div class="table-responsive">
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Card Name</th>
+                <th>Creature Type</th>
+                <th>Rarity</th>
+                <th>Instance Cost</th>
+                <th>Maintenance Cost</th>
+                <th>Gen Value</th>
+                <th>Burn Value</th>
+                <th>Health</th>
+                <th>Power</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr data-ng-show="!vm.cards.length">
+                <td colspan="10">No data available.</td>
+            </tr>
+            <tr data-ng-repeat="card in vm.cards">
+                <td>{{ card.cardName }}</td>
+                <td>{{ card.creatureType }}</td>
+                <td>{{ card.rarity }}</td>
+                <td>{{ card.instanceCost }}</td>
+                <td>{{ card.maintenanceCost }}</td>
+                <td>{{ card.genValue }}</td>
+                <td>{{ card.burnValue }}</td>
+                <td>{{ card.health }}</td>
+                <td>{{ card.power }}</td>
+                <td>
+                    <a class="label label-primary" data-ng-click="vm.editCard(card.$id)">Edit</a> |
+                    <a class="label label-danger" data-ng-click="vm.deleteCard(card.$id)">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
