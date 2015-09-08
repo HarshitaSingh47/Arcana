@@ -1,11 +1,19 @@
 (function () {
     'use strict';
 
-    function adminDecks($firebaseArray, $firebaseObject) {
-        var vm = this;
-        vm.message = 'test';
+    function adminDecks($firebaseArray, $firebaseObject, FIREBASE_URL) {
+        var vm = this,
+            fbRef = new Firebase(FIREBASE_URL + '/decks');
+
+        $firebaseArray(fbRef).$loaded(function (data) {
+            vm.cards = data;
+        });
+
+        vm.deleteDeck = function (deckId) {
+            $firebaseObject(fbRef.child(deckId)).$remove();
+        };
     }
-    adminDecks.$inject = ['$firebaseArray', '$firebaseObject'];
+    adminDecks.$inject = ['$firebaseArray', '$firebaseObject', 'FIREBASE_URL'];
 
     angular.module('arcana').controller('adminDecks', adminDecks);
 }());

@@ -56,7 +56,9 @@ gulp.task('lint', function () {
             global: ['angular', 'Firebase', 'ASQ', '_'],
             white: true,
             unparam: true,
-            todo: true
+            todo: true,
+            nomen: true,
+            plusplus: true
         }));
 });
 

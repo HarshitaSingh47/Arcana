@@ -83,3 +83,6 @@ public/js
 public/css
 public/index.html
 .idea/workspace.xml
+public/css/styles.min.css
+public/css/vendor.min.css
+public/js/vendor.min.js

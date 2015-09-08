@@ -25,7 +25,6 @@
         vm.rarities = ['Normal', 'Uncommon', 'Rare', 'Epic', 'Legendary'];
 
         vm.submit = function () {
-            /*jslint nomen:true*/
             var cardRef = fbRef.child(vm.card.cardType.toLowerCase()),
                 card = _.pick(vm.card, ['cardName', 'rarity', 'instanceCost', 'maintenanceCost', 'genValue', 'burnValue', 'health', 'power', 'description', 'flavorText']);
 
@@ -34,7 +33,6 @@
                 card.creatureType = vm.card.creatureType;
             }
 
-            /*jslint nomen:false*/
             $firebaseArray(cardRef).$add(card).then(function () {
                 $modalInstance.close();
             });
