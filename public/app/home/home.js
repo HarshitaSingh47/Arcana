@@ -1,19 +1,32 @@
 (function () {
     'use strict';
 
-    function home($rootScope, authService) {
-        var vm = this;
-        vm.currentUser = null;
+    function home($firebaseObject, $firebaseAuth, FIREBASE_URL, currentAuth) {
+        var vm = this,
+            fbRef = new Firebase(FIREBASE_URL);
 
-        $rootScope.$on('USER_AUTHENTICATED', function (ev, user) {
-            vm.currentUser = user;
+        vm.currentUser = undefined;
+
+        function activate() {
+            if (currentAuth && currentAuth.uid) {
+                $firebaseObject(fbRef.child('users').child(currentAuth.uid)).$loaded().then(function (user) {
+                    vm.currentUser = {
+                        uid: user.uid,
+                        username: user.username
+                    };
+                });
+            }
+        }
+
+        $firebaseAuth(fbRef).$onAuth(function (authData) {
+            if (!authData) {
+                vm.currentUser = undefined;
+            }
         });
 
-        $rootScope.$on('USER_UNAUTHENTICATED', function () {
-            vm.currentUser = null;
-        });
+        activate();
     }
-    home.$inject = ['$rootScope', 'authService'];
+    home.$inject = ['$firebaseObject', '$firebaseAuth', 'FIREBASE_URL', 'currentAuth'];
 
     angular.module('arcana').controller('home', home);
 }());

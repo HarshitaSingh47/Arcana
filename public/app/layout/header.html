@@ -1,4 +1,4 @@
-<header class="top-header clearfix" data-ng-cloak>
+<header class="top-header clearfix" data-ng-cloak data-ng-controller="header as vm">
     <div class="logo bg-dark">
         <a href="#/">
             <span>Arcana</span>
@@ -10,7 +10,7 @@
         <span class="icon-bar"></span>
     </div>
     <div class="top-nav" id="user-info">
-        <ul class="nav-left list-unstyled">
+        <ul class="nav-left list-unstyled" data-ng-show="vm.currentUser">
             <li class="dropdown hidden-xs" dropdown>
                 <a class="dropdown-toggle" dropdown-toggle data-toggle="dropdown">
                     <i class="ti-settings"></i>
@@ -55,7 +55,6 @@
                 </a>
             </li>
         </ul>
-        <!--
         <ul class="nav-right pull-right list-unstyled" data-ng-show="vm.currentUser">
             <li class="dropdown text-normal nav-profile">
                 <a class="dropdown-toggle" dropdown-toggle data-toggle="dropdown">
@@ -92,6 +91,5 @@
                 </a>
             </li>
         </ul>
-        <! -->
     </div>
 </header>

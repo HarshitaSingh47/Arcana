@@ -17,7 +17,7 @@
             };
 
             // Returns an ASQ object so we can catch any failures
-            authService.createUser(model).then(function () {
+            authService.register(model).then(function () {
                 $location.path('/');
             }).or(function (error) {
                 if (error.code === 'EMAIL_TAKEN') {

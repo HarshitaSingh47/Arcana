@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    function authService($firebaseAuth, $firebaseObject, $firebaseArray) {
+    function authService($firebaseAuth, $firebaseObject) {
         var fbRef = new Firebase('https://glaring-heat-7532.firebaseio.com/'),
             fbAuth = $firebaseAuth(fbRef);
 
@@ -13,17 +13,7 @@
             fbAuth.$unauth();
         }
 
-        /*
-        function getUserByUsername(username) {
-
-        }
-        */
-
-        function getUser(uid) {
-            return $firebaseObject(fbRef.child('users').child(uid)).$loaded();
-        }
-
-        function createUser(userInfo) {
+        function register(userInfo) {
             return ASQ(userInfo).then(function (next, userInfo) {
                 fbAuth.$createUser(userInfo).then(function (userData) {
                     userInfo.uid = userData.uid;
@@ -32,10 +22,10 @@
                     next.fail(error);
                 });
             }).then(function (next, userInfo) {
-                $firebaseArray(fbRef.child('users')).$add({
-                    username: userInfo.username,
-                    email: userInfo.email
-                }).then(function () {
+                var userRef = $firebaseObject(fbRef.child('users').child(userInfo.uid));
+                userRef.username = userInfo.username;
+                userRef.email = userInfo.email;
+                userRef.$save().then(function () {
                     next(userInfo);
                 });
             }).then(function (next, userInfo) {
@@ -47,11 +37,10 @@
         return {
             login: login,
             logout: logout,
-            getUser: getUser,
-            createUser: createUser
+            register: register
         };
     }
-    authService.$inject = ['$firebaseAuth', '$firebaseObject', '$firebaseArray'];
+    authService.$inject = ['$firebaseAuth', '$firebaseObject'];
 
     angular.module('arcana').factory('authService', authService);
 }());
