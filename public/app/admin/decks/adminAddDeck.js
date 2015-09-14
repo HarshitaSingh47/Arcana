@@ -4,7 +4,8 @@
     function adminAddDeck($location, $firebaseArray, FIREBASE_URL) {
         var vm = this,
             cardsFbRef = new Firebase(FIREBASE_URL + '/cards'),
-            decksFbRef = new Firebase(FIREBASE_URL + '/decks');
+            decksFbRef = new Firebase(FIREBASE_URL + '/decks'),
+            cardPropsToSave = ['$id', 'cardName', 'cardType', 'label', 'genValue', 'instanceCost', 'maintenanceCost', 'burnValue', 'health', 'power', 'rarity', 'description', 'flavorText', 'creatureType'];
 
         vm.batteryCards = [];
         vm.selectedBatteryCards = [];
@@ -39,29 +40,18 @@
 
         vm.addCard = function (cardType) {
             var selectedCard = getCardByCardType(cardType),
-                existingCard;
+                card;
             if (selectedCard) {
-                existingCard = _.findWhere(vm.deckCards, { cardId: selectedCard.$id });
-                if (!existingCard) {
-                    vm.deckCards.push({
-                        cardId: selectedCard.$id,
-                        cardType: cardType,
-                        count: 1,
-                        label: selectedCard.label
-                    });
-                } else {
-                    existingCard.count++;
-                }
+                card = _.pick(selectedCard, cardPropsToSave);
+                vm.deckCards.push(card);
             }
         };
 
         vm.removeCard = function (cardId) {
-            var existingCard = _.findWhere(vm.deckCards, { cardId: cardId });
-            if (existingCard.count > 1) {
-                existingCard.count--;
-            } else {
+            var existingCard = _.findWhere(vm.deckCards, { $id: cardId });
+            if (existingCard) {
                 vm.deckCards = _.reject(vm.deckCards, function (card) {
-                    return card.cardId === cardId;
+                    return card.$id === cardId;
                 });
             }
         };
@@ -90,6 +80,7 @@
             $firebaseArray(cardsFbRef.child('battery')).$loaded(function (data) {
                 angular.forEach(data, function (card) {
                     card.label = card.cardName + ' (G: ' + card.genValue + ')';
+                    card.cardType = 'Battery';
                     vm.batteryCards.push(card);
                 });
             });
@@ -97,6 +88,7 @@
             $firebaseArray(cardsFbRef.child('creature')).$loaded(function (data) {
                 angular.forEach(data, function (card) {
                     card.label = card.cardName + ' (I: ' + card.instanceCost + ' | M: ' + card.maintenanceCost + ' | H: ' + card.health + ' | P: ' + card.power + ')';
+                    card.cardType = 'Creature';
                     vm.creatureCards.push(card);
                 });
             });
@@ -104,6 +96,7 @@
             $firebaseArray(cardsFbRef.child('sorcery')).$loaded(function (data) {
                 angular.forEach(data, function (card) {
                     card.label = card.cardName + ' (I: ' + card.instanceCost + ' | M: ' + card.maintenanceCost + ')';
+                    card.cardType = 'Sorcery';
                     vm.sorceryCards.push(card);
                 });
             });
@@ -111,6 +104,7 @@
             $firebaseArray(cardsFbRef.child('modifier')).$loaded(function (data) {
                 angular.forEach(data, function (card) {
                     card.label = card.cardName + ' (I: ' + card.instanceCost + ' | M: ' + card.maintenanceCost + ')';
+                    card.cardType = 'Modifier';
                     vm.modifierCards.push(card);
                 });
             });
