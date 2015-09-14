@@ -80,6 +80,29 @@
             }
         });
 
+        $routeProvider.when('/lobby', {
+            templateUrl: '/app/lobby/lobby.html',
+            controller: 'lobby',
+            controllerAs: 'vm',
+            resolve: {
+                currentAuth: ['$firebaseAuth', function ($firebaseAuth) {
+                    return $firebaseAuth.$requireAuth();
+                }]
+            }
+        });
+
+        $routeProvider.when('/admin/rooms', {
+            templateUrl: '/app/admin/rooms/adminRooms.html',
+            controller: 'adminRooms',
+            controllerAs: 'vm'
+        });
+
+        $routeProvider.when('/admin/rooms/add', {
+            templateUrl: '/app/admin/rooms/adminAddRoom.html',
+            controller: 'adminAddRoom',
+            controllerAs: 'vm'
+        });
+
         $routeProvider.when('/admin/cards', {
             templateUrl: '/app/admin/cards/adminCards.html',
             controller: 'adminCards',
@@ -153,6 +176,7 @@
 
     angular.module('arcana', ['ngRoute', 'ngAnimate', 'firebase', 'ui.bootstrap'])
         .constant('FIREBASE_URL', 'https://glaring-heat-7532.firebaseio.com/')
+        .constant('CARD_TYPES', ['$id', 'cardName', 'cardType', 'label', 'genValue', 'instanceCost', 'maintenanceCost', 'burnValue', 'health', 'power', 'rarity', 'description', 'flavorText', 'creatureType'])
         .config(configureRoutes)
         .run(onAppRun);
 }());
