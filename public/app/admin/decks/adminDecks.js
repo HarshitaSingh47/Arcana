@@ -6,7 +6,7 @@
             fbRef = new Firebase(FIREBASE_URL + '/decks');
 
         $firebaseArray(fbRef).$loaded(function (data) {
-            vm.cards = data;
+            vm.decks = data;
         });
 
         vm.deleteDeck = function (deckId) {

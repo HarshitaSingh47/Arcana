@@ -79,10 +79,12 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
-public/js
-public/css
+public/js/app.min.js
+public/js/vendor.min.js
 public/index.html
 .idea/workspace.xml
+public/css/fonts
 public/css/styles.min.css
 public/css/vendor.min.css
-public/js/vendor.min.js
+public/css/ie_fix.css
+public/css/themify-icons.min.css
