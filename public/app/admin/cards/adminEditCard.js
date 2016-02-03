@@ -1,11 +1,11 @@
 (function () {
     'use strict';
 
-    function adminEditCard($modalInstance, card, cardType) {
+    function adminEditCard($modalInstance, cardInfo) {
         var vm = this;
 
-        vm.card = card;
-        vm.cardType = cardType;
+        vm.card = cardInfo.card;
+        vm.cardType = cardInfo.cardType;
         vm.title = 'Update Card - ' + vm.card.cardName;
         vm.creatureTypes = ['Organic', 'Mystical'];
         vm.rarities = ['Normal', 'Uncommon', 'Rare', 'Epic', 'Legendary'];
@@ -20,7 +20,7 @@
             $modalInstance.close();
         };
     }
-    adminEditCard.$inject = ['$modalInstance', 'card', 'cardType'];
+    adminEditCard.$inject = ['$modalInstance', 'cardInfo'];
 
     angular.module('arcana').controller('adminEditCard', adminEditCard);
 }());

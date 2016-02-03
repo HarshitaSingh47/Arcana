@@ -34,10 +34,25 @@
             });
         }
 
+        function waitForAuth() {
+            return fbAuth.$waitForAuth();
+        }
+
+        function requireAuth() {
+            return fbAuth.$requireAuth();
+        }
+
+        function getAuth() {
+            return fbAuth.$getAuth();
+        }
+
         return {
             login: login,
             logout: logout,
-            register: register
+            register: register,
+            waitForAuth: waitForAuth,
+            requireAuth: requireAuth,
+            getAuth: getAuth
         };
     }
     authService.$inject = ['$firebaseAuth', '$firebaseObject'];

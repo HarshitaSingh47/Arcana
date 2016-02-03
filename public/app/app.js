@@ -5,12 +5,7 @@
         $routeProvider.when('/', {
             templateUrl: '/app/home/home.html',
             controller: 'home',
-            controllerAs: 'vm',
-            resolve: {
-                currentAuth: ['$firebaseAuth', function ($firebaseAuth) {
-                    return $firebaseAuth.$waitForAuth();
-                }]
-            }
+            controllerAs: 'vm'
         });
 
         $routeProvider.when('/login', {
@@ -28,67 +23,37 @@
         $routeProvider.when('/profile', {
             templateUrl: '/app/auth/profile.html',
             controller: 'profile',
-            controllerAs: 'vm',
-            resolve: {
-                currentAuth: ['$firebaseAuth', function ($firebaseAuth) {
-                    return $firebaseAuth.$requireAuth();
-                }]
-            }
+            controllerAs: 'vm'
         });
 
         $routeProvider.when('/cards', {
             templateUrl: '/app/cards/cards.html',
             controller: 'cards',
-            controllerAs: 'vm',
-            resolve: {
-                currentAuth: ['$firebaseAuth', function ($firebaseAuth) {
-                    return $firebaseAuth.$requireAuth();
-                }]
-            }
+            controllerAs: 'vm'
         });
 
         $routeProvider.when('/decks', {
             templateUrl: '/app/decks/decks.html',
             controller: 'decks',
-            controllerAs: 'vm',
-            resolve: {
-                currentAuth: ['$firebaseAuth', function ($firebaseAuth) {
-                    return $firebaseAuth.$requireAuth();
-                }]
-            }
+            controllerAs: 'vm'
         });
 
         $routeProvider.when('/deckbuilder', {
             templateUrl: '/app/deckbuilder/deckbuilder.html',
             controller: 'deckbuilder',
-            controllerAs: 'vm',
-            resolve: {
-                currentAuth: ['$firebaseAuth', function ($firebaseAuth) {
-                    return $firebaseAuth.$requireAuth();
-                }]
-            }
+            controllerAs: 'vm'
         });
 
         $routeProvider.when('/store', {
             templateUrl: '/app/store/store.html',
             controller: 'store',
-            controllerAs: 'vm',
-            resolve: {
-                currentAuth: ['$firebaseAuth', function ($firebaseAuth) {
-                    return $firebaseAuth.$requireAuth();
-                }]
-            }
+            controllerAs: 'vm'
         });
 
         $routeProvider.when('/lobby', {
             templateUrl: '/app/lobby/lobby.html',
             controller: 'lobby',
-            controllerAs: 'vm',
-            resolve: {
-                currentAuth: ['$firebaseAuth', function ($firebaseAuth) {
-                    return $firebaseAuth.$requireAuth();
-                }]
-            }
+            controllerAs: 'vm'
         });
 
         $routeProvider.when('/admin/rooms', {

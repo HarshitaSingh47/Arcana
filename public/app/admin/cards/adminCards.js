@@ -34,7 +34,7 @@
         vm.editCard = function (cardId) {
             $firebaseObject(fbRef.child(vm.cardType.toLowerCase()).child(cardId)).$loaded(function (data) {
                 $modal.open({
-                    templateUrl: '/app/admin/cards/adminEditCard',
+                    templateUrl: '/app/admin/cards/adminEditCard.html',
                     controller: 'adminEditCard',
                     controllerAs: 'vm',
                     resolve: {
