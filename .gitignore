@@ -78,12 +78,5 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
-public/js/app.min.js
-public/js/vendor.min.js
-public/index.html
-public/css/fonts
-public/css/styles.min.css
-public/css/vendor.min.css
-public/css/ie_fix.css
-public/css/themify-icons.min.css
+/public/
 /.vscode/
