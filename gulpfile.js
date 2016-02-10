@@ -1,10 +1,19 @@
 var gulp = require('gulp'),
+    debug = require('gulp-debug'),
+    inject = require('gulp-inject'),
+    tsc = require('gulp-typescript'),
+    tslint = require('gulp-tslint'),
+    sourcemaps = require('gulp-sourcemaps'),
+    del = require('del'),
+    Config = require('./gulpfile.config.ts'),
+    tsProject = tsc.createProject('tsconfig.json'),
     concat = require('gulp-concat'),
     rename = require('gulp-rename'),
     sass = require('gulp-sass'),
     minifyCss = require('gulp-minify-css'),
     jslint = require('gulp-jslint'),
     uglify = require('gulp-uglify'),
+    config = new Config(),
     vendorJsSource = [
         'bower_components/jquery/dist/jquery.min.js',
         'bower_components/angular/angular.min.js',
@@ -50,29 +59,34 @@ gulp.task('vendor-scripts', function () {
                .pipe(gulp.dest('public/js'));
 });
 
-gulp.task('lint', function () {
-    return gulp.src('public/app/**/*.js')
-        .pipe(jslint({
-            global: ['angular', 'Firebase', 'ASQ', '_'],
-            white: true,
-            unparam: true,
-            todo: true,
-            nomen: true,
-            plusplus: true
-        }));
+gulp.task('ts-lint', function () {
+    return gulp.src(config.allTypeScript).pipe(tslint()).pipe(tslint.report('prose'));
 });
 
-gulp.task('app-scripts', function () {
-    return gulp.src('public/app/**/*.js')
-        .pipe(concat('app.js'))
-        .pipe(rename({ suffix: '.min' }))
-        //.pipe(uglify())
-        .pipe(gulp.dest('public/js'));
+gulp.task('compile-ts', function () {
+    var sourceTsFiles = [config.allTypeScript, config.libraryTypeScriptDefinitions];
+    var tsResult = gulp.src(sourceTsFiles)
+                       .pipe(sourcemaps.init())
+                       .pipe(tsc(tsProject));
+        
+    tsResult.dts.pipe(gulp.dest(config.tsOutputPath));
+    return tsResult.js.pipe(sourcemaps.write('.'))
+                      .pipe(gulp.dest(config.tsOutputPath));
+});
+
+gulp.task('clean-ts', function (cb) {
+    var typeScriptGenFiles = [
+        config.tsOutputPath + '/**/*.js',
+        config.tsOutputPath + '/**/*.js.map',
+        '!' + config.tsOutputPath + '/lib'
+    ];
+    
+    del(typeScriptGenFiles, cb);
 });
 
 gulp.task('watch', function () {
-    gulp.watch('public/app/**/*.js', ['lint', 'app-scripts']);
+    gulp.watch([config.allTypeScript], ['ts-lint', 'compile-ts']);
 });
 
 // default task
-gulp.task('default', ['vendor-css', 'core-css', 'vendor-scripts', 'lint', 'app-scripts']);
+gulp.task('default', ['vendor-css', 'core-css', 'vendor-scripts', 'lint', 'ts-lint', 'compile-ts']);
