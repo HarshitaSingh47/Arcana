@@ -81,6 +81,7 @@ $RECYCLE.BIN/
 public/js/app.min.js
 public/js/vendor.min.js
 public/index.html
+**/.idea/
 .idea/workspace.xml
 public/css/fonts
 public/css/styles.min.css
