@@ -78,5 +78,6 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
-/public/
+/public/js/**/*.js
+/public/css/**/*.css
 /.vscode/
