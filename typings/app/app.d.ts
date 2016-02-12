@@ -27,6 +27,11 @@ declare module app {
         login(): void;
     }
     
+    interface ILoginModel {
+        email: string;
+        password: string
+    }
+    
     interface IRegisterController {
         emailAddress: string;
         username: string;
@@ -36,51 +41,56 @@ declare module app {
         register(): void;
     }
     
+    interface IRegisterModel {
+        email: string;
+        password: string;
+        username: string;
+    }
+    
     interface ICardsController {
-        fbRef: FirebaseStatic;
+        fbRef: Firebase;
         currentUser: IAppUser;
         
         activate(): void;
     }
     
     interface IDeckBuilderController {
-        fbRef: FirebaseStatic;
+        fbRef: Firebase;
         currentUser: IAppUser;
         
         activate(): void;
     }
     
     interface IDecksController {
-        fbRef: FirebaseStatic;
+        fbRef: Firebase;
         currentUser: IAppUser;
         
         activate(): void;
     }
     
     interface IHomeController {
-        fbRef: FirebaseStatic;
+        fbRef: Firebase;
         fbAuth: AngularFireAuth;
         currentUser: IAppUser;
-        
-        activate(): void;
+        fbUser: FirebaseAuthData;
     }
     
     interface IHeaderController {
-        fbRef: FirebaseStatic;
+        fbRef: Firebase;
         currentUser: IAppUser;
         
         logout(): void;
     }
     
     interface IStoreController {
-        fbRef: FirebaseStatic;
+        fbRef: Firebase;
         currentUser: IAppUser;
         
         activate(): void;
     }
     
     interface IAdminAddCardController {
-        fbRef: FirebaseStatic;
+        fbRef: Firebase;
         card: ICard;
         cardTypes: string[];
         creatureTypes: string[];
@@ -91,7 +101,7 @@ declare module app {
     }
     
     interface IAdminCardsController {
-        fbRef: FirebaseStatic;
+        fbRef: Firebase;
         cardType: string;
         
         loadCards(): void;
@@ -111,5 +121,17 @@ declare module app {
         
         submit(): void;
         cancel(): void;
+    }
+    
+    interface IAuthService {
+        fbRef: Firebase;
+        fbAuth: AngularFireAuth;
+        
+        login(model: ILoginModel): ng.IPromise<any>;
+        logout(): void;
+        register(userInfo): ng.IPromise<any>;
+        waitForAuth(): ng.IPromise<any>;
+        requireAuth(): ng.IPromise<any>;
+        getAuth(): FirebaseAuthData;
     }
 }

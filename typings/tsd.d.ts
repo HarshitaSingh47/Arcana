@@ -6,3 +6,4 @@
 /// <reference path="firebase/firebase.d.ts" />
 /// <reference path="bootstrap/bootstrap.d.ts" />
 /// <reference path="node/node.d.ts" />
+/// <reference path="app/app.d.ts" />
