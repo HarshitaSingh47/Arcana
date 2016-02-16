@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "es2015",
+        "removeComments": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "noEmitHelpers": false,
+        "sourceMap": true
+    },
+    "files": [
+        "typings/tsd.d.ts",
+        "app/app.ts",
+        "app/app.controllers.ts",
+        "app/app.services.ts",
+        "app/auth/login.ts",
+        "app/auth/register.ts",
+        "app/home/home.ts"
+    ],
+    "compileOnSave": false,
+    "buildOnSave": false
+}

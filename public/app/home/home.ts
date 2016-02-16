@@ -23,12 +23,13 @@ module app.home {
             }
             
             this.fbAuth.$onAuth((authData) => {
-                this.currentUser.uid = authData.uid;
-                
                 if (authData) {
                     this.$firebaseObject(this.fbRef.child('users').child(authData.uid)).$loaded().then((user) => {
                         this.currentUser.username = user.$value.username;
+                        this.currentUser.uid = user.$value.uid;
                     });
+                } else {
+                    this.currentUser = undefined;
                 }
             });
         }

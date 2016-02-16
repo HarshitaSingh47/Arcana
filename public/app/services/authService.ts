@@ -36,4 +36,11 @@ module app.authService {
             return this.fbAuth.$getAuth();
         }
     }
+    
+    factory.$inject = ['$firebaseAuth', '$firebaseObject'];
+    function factory($firebaseAuth: AngularFireAuthService, $firebaseObject: AngularFireObjectService): IAuthService {
+        return new AuthService($firebaseAuth, $firebaseObject);
+    }
+    
+    angular.module('app.services').factory('AuthService', factory);
 }

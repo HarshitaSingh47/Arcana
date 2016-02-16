@@ -4,8 +4,6 @@ var gulp = require('gulp'),
     tsc = require('gulp-typescript'),
     tslint = require('gulp-tslint'),
     sourcemaps = require('gulp-sourcemaps'),
-    del = require('del'),
-    Config = require('./gulpfile.config.ts'),
     tsProject = tsc.createProject('tsconfig.json'),
     concat = require('gulp-concat'),
     rename = require('gulp-rename'),
@@ -13,7 +11,6 @@ var gulp = require('gulp'),
     minifyCss = require('gulp-minify-css'),
     jslint = require('gulp-jslint'),
     uglify = require('gulp-uglify'),
-    config = new Config(),
     vendorJsSource = [
         'bower_components/jquery/dist/jquery.min.js',
         'bower_components/angular/angular.min.js',
@@ -60,33 +57,23 @@ gulp.task('vendor-scripts', function () {
 });
 
 gulp.task('ts-lint', function () {
-    return gulp.src(config.allTypeScript).pipe(tslint()).pipe(tslint.report('prose'));
+    return gulp.src('./public/app/**/*.ts').pipe(tslint()).pipe(tslint.report('prose'));
 });
 
 gulp.task('compile-ts', function () {
-    var sourceTsFiles = [config.allTypeScript, config.libraryTypeScriptDefinitions];
+    var sourceTsFiles = ['./public/app/**/*.ts', './typings/**/*.ts'];
     var tsResult = gulp.src(sourceTsFiles)
                        .pipe(sourcemaps.init())
                        .pipe(tsc(tsProject));
         
-    tsResult.dts.pipe(gulp.dest(config.tsOutputPath));
+    tsResult.dts.pipe(gulp.dest('public/js'));
     return tsResult.js.pipe(sourcemaps.write('.'))
-                      .pipe(gulp.dest(config.tsOutputPath));
-});
-
-gulp.task('clean-ts', function (cb) {
-    var typeScriptGenFiles = [
-        config.tsOutputPath + '/**/*.js',
-        config.tsOutputPath + '/**/*.js.map',
-        '!' + config.tsOutputPath + '/lib'
-    ];
-    
-    del(typeScriptGenFiles, cb);
+                      .pipe(gulp.dest('public/js'));
 });
 
 gulp.task('watch', function () {
-    gulp.watch([config.allTypeScript], ['ts-lint', 'compile-ts']);
+    gulp.watch(['./public/app/**/*.ts'], ['ts-lint', 'compile-ts']);
 });
 
 // default task
-gulp.task('default', ['vendor-css', 'core-css', 'vendor-scripts', 'lint', 'ts-lint', 'compile-ts']);
+gulp.task('default', ['vendor-css', 'core-css', 'vendor-scripts', 'ts-lint', 'compile-ts']);
