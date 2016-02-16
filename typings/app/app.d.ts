@@ -25,6 +25,8 @@ declare module app {
     }
     
     interface ILoginController {
+        fbRef: Firebase;
+        fbAuth: AngularFireAuth;
         emailAddress: string;
         password: string;
         errorMessage: string;
@@ -37,6 +39,8 @@ declare module app {
     }
     
     interface IRegisterController {
+        fbRef: Firebase;
+        fbAuth: AngularFireAuth;
         emailAddress: string;
         username: string;
         password: string;

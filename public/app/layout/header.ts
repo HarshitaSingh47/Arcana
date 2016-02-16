@@ -9,8 +9,8 @@ module app.header {
         currentUser: IAppUser;
         fbUser: FirebaseAuthData;
         
-        static $inject: string[] = ['$firebaseAuth', '$firebaseObject', 'FIREBASE_URL', 'AuthService'];
-        constructor(private $firebaseAuth: AngularFireAuthService, private $firebaseObject: AngularFireObjectService, private FIREBASE_URL: string, private authService: IAuthService) {
+        static $inject: string[] = ['$firebaseAuth', '$firebaseObject', 'FIREBASE_URL'];
+        constructor(private $firebaseAuth: AngularFireAuthService, private $firebaseObject: AngularFireObjectService, private FIREBASE_URL: string) {
             this.fbRef = new Firebase(FIREBASE_URL);
             this.fbAuth = $firebaseAuth(this.fbRef);
             this.fbUser = this.fbAuth.$getAuth();
@@ -39,7 +39,7 @@ module app.header {
         }
         
         logout(): void {
-            this.authService.logout();
+            this.fbAuth.$unauth();
             this.currentUser = undefined;
         }
     }
