@@ -7,7 +7,7 @@ module app.register {
         emailAddress: string;
         username: string;
         password: string;
-        errorMessage: string;
+        errorMessage: string = '';
         
         static $inject: string[] = ['$location', 'AuthService'];
         constructor(private $location: ng.ILocationService, private authService: IAuthService) { }

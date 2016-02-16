@@ -38,7 +38,8 @@
         'ngRoute',
         'firebase',
         'app.controllers',
-        'app.services'
+        'app.services',
+        'app.directives'
     ])
     .constant('FIREBASE_URL', 'https://glaring-heat-7532.firebaseio.com/')
     .constant('CARD_TYPES', ['$id', 'cardName', 'cardType', 'label', 'genValue', 'instanceCost', 'maintenanceCost', 'burnValue', 'health', 'power', 'rarity', 'description', 'flavorText', 'creatureType'])

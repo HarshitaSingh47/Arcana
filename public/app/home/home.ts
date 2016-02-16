@@ -16,17 +16,21 @@ module app.home {
             this.fbUser = this.fbAuth.$getAuth();
             
             if (this.fbUser && this.fbUser.uid) {
-                this.$firebaseObject(this.fbRef.child('users').child(this.fbUser.uid)).$loaded().then((user) => {
-                    this.currentUser.uid = this.fbUser.uid;
-                    this.currentUser.username = user.$value.username;
+                this.$firebaseObject(this.fbRef.child('users').child(this.fbUser.uid)).$loaded().then((user: IUser) => {
+                    this.currentUser = {
+                        username: user.username,
+                        uid: this.fbUser.uid
+                    };
                 });
             }
             
             this.fbAuth.$onAuth((authData) => {
                 if (authData) {
-                    this.$firebaseObject(this.fbRef.child('users').child(authData.uid)).$loaded().then((user) => {
-                        this.currentUser.username = user.$value.username;
-                        this.currentUser.uid = user.$value.uid;
+                    this.$firebaseObject(this.fbRef.child('users').child(authData.uid)).$loaded().then((user: IUser) => {
+                        this.currentUser = {
+                            username: user.username,
+                            uid: this.fbUser.uid
+                        };
                     });
                 } else {
                     this.currentUser = undefined;

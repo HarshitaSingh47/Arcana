@@ -1,5 +1,9 @@
 /// <reference path="../tsd.d.ts" />
 declare module app {
+    interface IUser extends AngularFireObject {
+        username: string;
+    }
+    
     interface IAppUser {
         uid: string;
         username: string;
@@ -77,7 +81,9 @@ declare module app {
     
     interface IHeaderController {
         fbRef: Firebase;
+        fbAuth: AngularFireAuth;
         currentUser: IAppUser;
+        fbUser: FirebaseAuthData;
         
         logout(): void;
     }

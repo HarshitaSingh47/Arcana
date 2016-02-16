@@ -6,7 +6,7 @@ module app.login {
     class LoginController implements ILoginController {
         emailAddress: string;
         password: string;
-        errorMessage: string;
+        errorMessage: string = '';
         
         static $inject: string[] = ['$location', 'AuthService'];
         constructor(private $location: ng.ILocationService, private authService: IAuthService) { }
