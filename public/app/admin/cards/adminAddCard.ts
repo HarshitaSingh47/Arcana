@@ -5,20 +5,7 @@ module app.admin {
     
     class AdminAddCardController implements IAdminAddCardController {
         fbRef: Firebase;
-        card: ICard = {
-            cardName: '',
-            cardType: '',
-            creatureType: 'Organic',
-            rarity: 'Normal',
-            instanceCost: 0,
-            maintenanceCost: 0,
-            genValue: 0,
-            burnValue: 0,
-            health: 0,
-            power: 0,
-            description: '',
-            flavorText: ''
-        };
+        card: ICard;
         cardTypes: string[] = ['Creature', 'Battery', 'Modifier', 'Sorcery'];
         creatureTypes: string[] = ['Organic', 'Mystical'];
         rarities: string[] = ['Normal', 'Uncommon', 'Rare', 'Epic', 'Legendary'];
@@ -26,7 +13,18 @@ module app.admin {
         static $inject: string[] = ['$modalInstance', '$firebaseArray', 'FIREBASE_URL', 'cardType'];
         constructor(private $modalInstance: angular.ui.bootstrap.IModalServiceInstance, private $firebaseArray: AngularFireArrayService, private FIREBASE_URL: string, private cardType: string) {
             this.fbRef = new Firebase(FIREBASE_URL + '/cards');
+            this.card.cardName = '';
             this.card.cardType = this.cardType;
+            this.card.creatureType = 'Organic';
+            this.card.rarity = 'Normal';
+            this.card.instanceCost = 0;
+            this.card.maintenanceCost = 0;
+            this.card.genValue = 0;
+            this.card.burnValue = 0;
+            this.card.health = 0;
+            this.card.power = 0;
+            this.card.description = '';
+            this.card.flavorText = '';
         }
         
         submit(): void {
