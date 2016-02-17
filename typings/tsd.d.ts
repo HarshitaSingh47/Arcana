@@ -9,3 +9,4 @@
 /// <reference path="node/node.d.ts" />
 /// <reference path="app/app.d.ts" />
 /// <reference path="angularjs/angular-route.d.ts" />
+/// <reference path="angular-ui-bootstrap/angular-ui-bootstrap.d.ts" />

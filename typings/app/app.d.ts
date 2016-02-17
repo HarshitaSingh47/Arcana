@@ -9,7 +9,7 @@ declare module app {
         username: string;
     }
     
-    interface ICard {
+    interface ICard extends AngularFireObject {
         cardName: string;
         cardType: string;
         creatureType: string;
@@ -119,7 +119,6 @@ declare module app {
         addCard(): void;
         editCard(cardId: string): void;
         deleteCard(cardId: string): void;
-        activate(): void;
     }
     
     interface IAdminEditCardController {
