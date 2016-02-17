@@ -111,7 +111,6 @@ declare module app {
     }
     
     interface IAdminCardsController {
-        fbRef: Firebase;
         cardType: string;
         
         loadCards(): void;
@@ -142,5 +141,12 @@ declare module app {
         waitForAuth(): ng.IPromise<any>;
         requireAuth(): ng.IPromise<any>;
         getAuth(): FirebaseAuthData;
+    }
+    
+    interface ICardService {
+        apiUrl: string;
+        
+        getCards(): ng.IPromise<any>;
+        getCardsByType(cardType: string): ng.IPromise<any>;
     }
 }

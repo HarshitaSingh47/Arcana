@@ -3,10 +3,8 @@ var Card = require('../models/card');
 exports.list = function (req, res) {
     Card.find().exec(function (err, results) {
         if (err) {
-            console.log(err);
             res.status(500).json({ error: err });
         } else {
-            console.log(results);
             res.status(200).json(results);
         }
     });
@@ -22,10 +20,8 @@ exports.listByType = function (req, res, cardType) {
     
     query.exec(function (err, results) {
         if (err) {
-            console.log(err);
             res.status(500).json({error: err});
         } else {
-            console.log(results);
             res.status(200).json(results);
         }
     });

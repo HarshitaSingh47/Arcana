@@ -29,7 +29,7 @@ module app.home {
                     this.$firebaseObject(this.fbRef.child('users').child(authData.uid)).$loaded().then((user: IUser) => {
                         this.currentUser = {
                             username: user.username,
-                            uid: this.fbUser.uid
+                            uid: authData.uid
                         };
                     });
                 } else {

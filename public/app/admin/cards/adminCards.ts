@@ -4,19 +4,17 @@ module app.admin {
     'use strict';
     
     class AdminCardsController implements IAdminCardsController {
-        fbRef: Firebase;
-        cardType: string = 'Battery';
-        cards: AngularFireArray;
+        cardType: string = 'battery';
+        cards: ICard[];
         
-        static $inject: string[] = ['$modal', '$firebaseArray', '$firebaseObject', 'FIREBASE_URL'];
-        constructor(private $modal: angular.ui.bootstrap.IModalService, private $firebaseArray: AngularFireArrayService, private $firebaseObject: AngularFireObjectService, private FIREBASE_URL: string) {
-            this.fbRef = new Firebase(FIREBASE_URL + '/cards');
+        static $inject: string[] = ['CardService'];
+        constructor(private cardService: ICardService) {
             this.loadCards();
         }
         
         loadCards(): void {
-            this.$firebaseArray(this.fbRef.child(this.cardType.toLowerCase())).$loaded((data) => {
-                this.cards = data;
+            this.cardService.getCardsByType(this.cardType).then((results) => {
+                this.cards = results.data;
             });
         }
         
@@ -26,6 +24,7 @@ module app.admin {
         }
         
         addCard(): void {
+            /*
             this.$modal.open({
                 templateUrl: '/app/admin/cards/adminAddCard.html',
                 controller: 'AdminAddCardController',
@@ -36,9 +35,11 @@ module app.admin {
                     }
                 }
             });
+            */
         }
         
         editCard(cardId: string): void {
+            /*
             this.$firebaseObject(this.fbRef.child(this.cardType.toLowerCase()).child(cardId)).$loaded((data) => {
                 this.$modal.open({
                     templateUrl: '/app/admin/cards/adminEditCard.html',
@@ -54,10 +55,11 @@ module app.admin {
                     }
                 });
             });
+            */
         }
         
         deleteCard(cardId: string): void {
-            this.$firebaseObject(this.fbRef.child(this.cardType).child(cardId)).$remove();
+            //this.$firebaseObject(this.fbRef.child(this.cardType).child(cardId)).$remove();
         }
     }
     

@@ -1,5 +1,6 @@
 var gulp = require('gulp'),
     debug = require('gulp-debug'),
+    del = require('del'),
     inject = require('gulp-inject'),
     tsc = require('gulp-typescript'),
     tslint = require('gulp-tslint'),
@@ -70,6 +71,8 @@ gulp.task('compile-ts', function () {
     return tsResult.js.pipe(sourcemaps.write('.'))
                       .pipe(gulp.dest('public/js'));
 });
+
+gulp.task('recompile', ['ts-lint', 'compile-ts']);
 
 gulp.task('watch', function () {
     gulp.watch(['./public/app/**/*.ts'], ['ts-lint', 'compile-ts']);

@@ -21,6 +21,12 @@
             controller: 'RegisterController',
             controllerAs: 'vm'
         });
+        
+        $routeProvider.when('/admin/cards', {
+            templateUrl: '/app/admin/cards/adminCards.html',
+            controller: 'AdminCardsController',
+            controllerAs: 'vm'
+        });
     }
     configureRoutes.$inject = ['$routeProvider'];
     
