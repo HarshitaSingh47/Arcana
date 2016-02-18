@@ -2,10 +2,6 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     Card = require('./card'),
     userSchema = new Schema({
-        firebaseId: {
-            type: String,
-            required: true
-        },
         username: {
             type: String,
             required: true

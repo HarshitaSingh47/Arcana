@@ -16,10 +16,6 @@ module app.userService {
             return this.$http.get(this.apiUrl + 'id/' + userId);
         }
         
-        getUserByFirebaseId(firebaseId: string): ng.IPromise<any> {
-            return this.$http.get(this.apiUrl + 'firebaseId/' + firebaseId);
-        }
-        
         getUserByUsername(username: string): ng.IPromise<any> {
             return this.$http.get(this.apiUrl + 'username/' + username);
         }
