@@ -4,7 +4,7 @@ module app.cardService {
     'use strict';
     
     class CardService implements ICardService {
-        apiUrl: string = '/api/cards/cardType/';
+        apiUrl: string = '/api/cards/';
         
         constructor(private $http: ng.IHttpService) { }
         
@@ -13,7 +13,11 @@ module app.cardService {
         }
         
         getCardsByType(cardType: string): ng.IPromise<any> {
-            return this.$http.get(this.apiUrl + cardType.toLowerCase());
+            return this.$http.get(this.apiUrl + 'cardType/' + cardType.toLowerCase());
+        }
+        
+        getCardById(cardId: string): ng.IPromise<any> {
+            return this.$http.get(this.apiUrl + 'id/' + cardId);
         }
     }
     

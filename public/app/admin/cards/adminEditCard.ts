@@ -18,9 +18,11 @@ module app.admin {
         }
         
         submit(): void {
+            /*
             this.card.$save().then(() => {
                 this.$modalInstance.close();
             });
+            */
         }
         
         cancel(): void {

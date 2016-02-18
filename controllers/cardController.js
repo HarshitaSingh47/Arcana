@@ -5,7 +5,7 @@ exports.list = function (req, res) {
         if (err) {
             res.status(500).json({ error: err });
         } else {
-            res.status(200).json(results);
+            res.status(200).json(results.data);
         }
     });
 };
@@ -26,6 +26,16 @@ exports.listByType = function (req, res, cardType) {
         }
     });
 };
+
+exports.getById = function (req, res, cardId) {
+    Card.find().where({ '_id': cardId }).exec(function (err, results) {
+        if (err) {
+            res.status(500).json({error: err});
+        } else {
+            res.status(200).json(results);
+        }
+    });
+}
 
 exports.create = function (req, res) {
     var card = new Card({

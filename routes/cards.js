@@ -6,6 +6,10 @@ router.get('/', function (req, res) {
     return cardCtrl.list(req, res);
 });
 
+router.get('/id/:cardId', function (req, res) {
+    return cardCtrl.getById(req, res, req.params.cardId);
+});
+
 router.get('/cardType/:cardType', function (req, res) {
     return cardCtrl.listByType(req, res, req.params.cardType);
 });

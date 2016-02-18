@@ -9,10 +9,9 @@ declare module app {
         username: string;
     }
     
-    interface ICard extends AngularFireObject {
+    interface ICard {
         cardName: string;
         cardType: string;
-        creatureType: string;
         rarity: string;
         instanceCost: number;
         maintenanceCost: number;
@@ -100,7 +99,6 @@ declare module app {
     }
     
     interface IAdminAddCardController {
-        fbRef: Firebase;
         card: ICard;
         cardTypes: string[];
         creatureTypes: string[];
@@ -148,5 +146,6 @@ declare module app {
         
         getCards(): ng.IPromise<any>;
         getCardsByType(cardType: string): ng.IPromise<any>;
+        getCardById(cardId: string): ng.IPromise<any>;
     }
 }

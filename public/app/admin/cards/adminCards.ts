@@ -5,12 +5,9 @@ module app.admin {
     
     class AdminCardsController implements IAdminCardsController {
         cardType: string = 'battery';
-        cards: ICard[];
         
-        static $inject: string[] = ['CardService'];
-        constructor(private cardService: ICardService) {
-            this.loadCards();
-        }
+        static $inject: string[] = ['$modal', 'CardService', 'cards'];
+        constructor(private $modal: angular.ui.bootstrap.IModalService, private cardService: ICardService, private cards: ICard[]) { }
         
         loadCards(): void {
             this.cardService.getCardsByType(this.cardType).then((results) => {
@@ -24,7 +21,6 @@ module app.admin {
         }
         
         addCard(): void {
-            /*
             this.$modal.open({
                 templateUrl: '/app/admin/cards/adminAddCard.html',
                 controller: 'AdminAddCardController',
@@ -35,12 +31,10 @@ module app.admin {
                     }
                 }
             });
-            */
         }
         
         editCard(cardId: string): void {
-            /*
-            this.$firebaseObject(this.fbRef.child(this.cardType.toLowerCase()).child(cardId)).$loaded((data) => {
+            this.cardService.getCardById(cardId).then((results) => {
                 this.$modal.open({
                     templateUrl: '/app/admin/cards/adminEditCard.html',
                     controller: 'AdminEditCardController',
@@ -48,14 +42,13 @@ module app.admin {
                     resolve: {
                         cardInfo: () => {
                             return {
-                                card: data,
+                                card: results.data[0],
                                 cardType: this.cardType
                             };
                         }
                     }
                 });
             });
-            */
         }
         
         deleteCard(cardId: string): void {

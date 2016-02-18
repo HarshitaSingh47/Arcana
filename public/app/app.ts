@@ -25,7 +25,14 @@
         $routeProvider.when('/admin/cards', {
             templateUrl: '/app/admin/cards/adminCards.html',
             controller: 'AdminCardsController',
-            controllerAs: 'vm'
+            controllerAs: 'vm',
+            resolve: {
+                cards: ['CardService', (cardService) => {
+                    return cardService.getCardsByType('battery').then(function (results) {
+                        return results.data;
+                    });
+                }]
+            }
         });
     }
     configureRoutes.$inject = ['$routeProvider'];
@@ -45,7 +52,8 @@
         'firebase',
         'app.controllers',
         'app.services',
-        'app.directives'
+        'app.directives',
+        'ui.bootstrap'
     ])
     .constant('FIREBASE_URL', 'https://glaring-heat-7532.firebaseio.com/')
     .constant('CARD_TYPES', ['$id', 'cardName', 'cardType', 'label', 'genValue', 'instanceCost', 'maintenanceCost', 'burnValue', 'health', 'power', 'rarity', 'description', 'flavorText', 'creatureType'])
