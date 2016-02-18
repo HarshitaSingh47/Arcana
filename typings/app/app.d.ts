@@ -148,4 +148,15 @@ declare module app {
         getCardsByType(cardType: string): ng.IPromise<any>;
         getCardById(cardId: string): ng.IPromise<any>;
     }
+    
+    interface IUserService {
+        apiUrl: string;
+        
+        getUsers(): ng.IPromise<any>;
+        getUserById(userId: string): ng.IPromise<any>;
+        getUserByFirebaseId(firebaseId: string): ng.IPromise<any>;
+        getUserByUsername(username: string): ng.IPromise<any>;
+        getUserByEmail(emailAddress: string): ng.IPromise<any>;
+        createUser(user: any): ng.IPromise<any>;
+    }
 }

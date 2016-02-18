@@ -5,6 +5,7 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     routes = require('./routes/index'),
     cardApi = require('./routes/cards'),
+    userApi = require('./routes/users'),
     mongoose = require('mongoose'),
     app = express(),
     server = require('http').createServer(app);
@@ -25,6 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/api/cards', cardApi);
+app.use('/api/users', userApi);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
