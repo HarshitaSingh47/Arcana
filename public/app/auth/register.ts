@@ -11,8 +11,8 @@ module app.register {
         password: string;
         errorMessage: string = '';
         
-        static $inject: string[] = ['$firebaseAuth', '$firebaseObject', '$location', 'AuthService', 'FIREBASE_URL'];
-        constructor(private $firebaseAuth: AngularFireAuthService, private $firebaseObject: AngularFireObjectService, private $location: ng.ILocationService, private authService: IAuthService, private FIREBASE_URL: string) { 
+        static $inject: string[] = ['$firebaseAuth', '$firebaseObject', '$location', 'UserService', 'FIREBASE_URL'];
+        constructor(private $firebaseAuth: AngularFireAuthService, private $firebaseObject: AngularFireObjectService, private $location: ng.ILocationService, private userService: IUserService, private FIREBASE_URL: string) { 
             this.fbRef = new Firebase(this.FIREBASE_URL);
             this.fbAuth = this.$firebaseAuth(this.fbRef);
         }
@@ -24,11 +24,15 @@ module app.register {
                 username: this.username
             };
             
+            // Create user in Firebase
             this.fbAuth.$createUser(model).then((userData) => {
-                return this.fbRef.child('users').child(userData.uid).set({ email: model.email, username: model.username });
+                // Create user in MongoDB
+                return this.userService.createUser({username: model.username, emailAddress: model.email });
             }).then(() => {
+                // Log user in
                 return this.fbAuth.$authWithPassword({ email: model.email, password: model.password });
             }).then(() => {
+                // Redirect to home page
                 this.$location.path('/');
             });
         }

@@ -42,9 +42,9 @@ exports.getByEmailAddress = function (req, res, email) {
 
 exports.create = function (req, res) {
     var user = new User({
-        firebaseId: req.body.firebaseId,
         username: req.body.username,
-        emailAddress: req.body.emailAddress
+        emailAddress: req.body.emailAddress,
+        userCards: []
     });
     
     user.save(function (err) {
