@@ -7,26 +7,25 @@ module app.admin {
         card: ICard;
         cardType: string;
         title: string;
-        creatureTypes: string[] = ['Organic', 'Mystical'];
         rarities: string[] = ['Normal', 'Uncommon', 'Rare', 'Epic', 'Legendary'];
         
-        static $inject: string[] = ['$modalInstance', 'cardInfo'];
-        constructor(private $modalInstance: angular.ui.bootstrap.IModalServiceInstance, private cardInfo: any) {
+        static $inject: string[] = ['$modalInstance', 'CardService', 'cardInfo'];
+        constructor(private $modalInstance: angular.ui.bootstrap.IModalServiceInstance, private cardService: ICardService, private cardInfo: any) {
             this.card = cardInfo.card;
             this.cardType = cardInfo.cardType;
             this.title = `Update Card - ${this.card.cardName}`;
         }
         
         submit(): void {
-            /*
-            this.card.$save().then(() => {
+            this.cardService.updateCard(this.card).then((result) => {
                 this.$modalInstance.close();
+            }).catch((errResult) => {
+                console.log(errResult);
             });
-            */
         }
         
         cancel(): void {
-            this.$modalInstance.close();
+            this.$modalInstance.dismiss();
         }
     }
     

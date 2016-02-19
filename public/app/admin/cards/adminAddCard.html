@@ -3,6 +3,9 @@
     <h3 class="modal-title">Add New Card</h3>
 </div>
 <div class="modal-body">
+    <div class="alert alert-danger" data-ng-show="vm.errorMessage !== ''">
+        <span class="text-small">{{ vm.errorMessage }}</span>
+    </div>
     <form role="form" name="addCardForm" class="form-horizontal" novalidate data-ng-submit="vm.submit()">
         <div class="form-group">
             <label for="cardName" class="col-sm-4 control-label">Card Name:</label>
@@ -14,12 +17,6 @@
             <label for="cardType" class="col-sm-4 control-label">Card Type:</label>
             <div class="col-sm-8">
                 <select id="cardType" name="cardType" class="form-control" data-ng-model="vm.card.cardType" data-ng-options="cardType for cardType in vm.cardTypes"></select>
-            </div>
-        </div>
-        <div class="form-group" data-ng-show="vm.card.cardType === 'Creature'">
-            <label for="creatureType" class="col-sm-4 control-label">Creature Type:</label>
-            <div class="col-sm-8">
-                <select id="creatureType" name="creatureType" class="form-control" data-ng-model="vm.card.creatureType" data-ng-options="creatureType for creatureType in vm.creatureTypes"></select>
             </div>
         </div>
         <div class="form-group">

@@ -37,7 +37,7 @@ exports.getById = function (req, res, cardId) {
     });
 }
 
-exports.create = function (req, res) {
+exports.createCard = function (req, res) {
     var card = new Card({
         cardType: req.body.cardType,
         cardName: req.body.cardName,
@@ -56,7 +56,37 @@ exports.create = function (req, res) {
         if (err) {
             res.status(500).json({error: err});
         } else {
-            res.status(200);
+            res.status(200).send();
         }
+    });
+}
+
+exports.updateCard = function (req, res) {
+    var query = { '_id': req.body._id },
+        update = {
+            cardName: req.body.cardName,
+            burnValue: req.body.burnValue,
+            description: req.body.description,
+            flavorText: req.body.flavorText,
+            genValue: req.body.genValue,
+            health: req.body.health,
+            instanceCost: req.body.instanceCost,
+            maintenanceCost: req.body.maintenanceCost,
+            power: req.body.power,
+            rarity: req.body.rarity
+        };
+        
+    Card.findOneAndUpdate(query, update, function (err, result) {
+        if (err) {
+            res.status(500).json({error: err});
+        } else {
+            res.status(200).send();
+        }
+    });
+}
+
+exports.deleteCard = function (req, res) {
+    Card.find({ '_id': req.body.cardId }).remove(function (result) {
+        res.status(200).send();
     });
 }

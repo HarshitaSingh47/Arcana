@@ -28,7 +28,7 @@
             controllerAs: 'vm',
             resolve: {
                 cards: ['CardService', (cardService) => {
-                    return cardService.getCardsByType('battery').then(function (results) {
+                    return cardService.getCardsByType('Battery').then(function (results) {
                         return results.data;
                     });
                 }]

@@ -15,15 +15,27 @@ module app.cardService {
         }
         
         getCardsByType(cardType: string): ng.IPromise<any> {
-            return this.$http.get(`${this.apiUrl}cardType/${cardType}`).then((results) => {
+            return this.$http.get(this.apiUrl + 'cardType/' + cardType).then((results) => {
                 return results.data;
             });
         }
         
         getCardById(cardId: string): ng.IPromise<any> {
-            return this.$http.get(`${this.apiUrl}id/${cardId}`).then((results) => {
+            return this.$http.get(this.apiUrl + 'id/' + cardId).then((results) => {
                 return results.data[0];
             });
+        }
+        
+        createCard(card: any): ng.IPromise<any> {
+            return this.$http.post(this.apiUrl, card);
+        }
+        
+        updateCard(card: any): ng.IPromise<any> {
+            return this.$http.put(this.apiUrl, card);
+        }
+        
+        deleteCard(cardId: string): ng.IPromise<any> {
+            return this.$http.post(this.apiUrl + '/deleteCard', { cardId: cardId });
         }
     }
     

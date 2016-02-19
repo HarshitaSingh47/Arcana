@@ -102,7 +102,6 @@ declare module app {
     interface IAdminAddCardController {
         card: ICard;
         cardTypes: string[];
-        creatureTypes: string[];
         rarities: string[];
         
         submit(): void;
@@ -116,6 +115,7 @@ declare module app {
         showCards(cardType: string): void;
         addCard(): void;
         editCard(cardId: string): void;
+        showEditCard(card: any): void;
         deleteCard(cardId: string): void;
     }
     
@@ -123,7 +123,6 @@ declare module app {
         card: ICard;
         cardType: string;
         title: string;
-        creatureTypes: string[];
         rarities: string[];
         
         submit(): void;
@@ -148,6 +147,9 @@ declare module app {
         getCards(): ng.IPromise<any>;
         getCardsByType(cardType: string): ng.IPromise<any>;
         getCardById(cardId: string): ng.IPromise<any>;
+        createCard(card: any): ng.IPromise<any>;
+        updateCard(card: any): ng.IPromise<any>;
+        deleteCard(cardId: string): ng.IPromise<any>;
     }
     
     interface IUserService {

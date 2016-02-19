@@ -15,7 +15,15 @@ router.get('/cardType/:cardType', function (req, res) {
 });
 
 router.post('/', function (req, res) {
-    return cardCtrl.create(req, res);
+    return cardCtrl.createCard(req, res);
+});
+
+router.put('/', function (req, res) {
+    return cardCtrl.updateCard(req, res);
+});
+
+router.post('/deleteCard', function (req, res) {
+    return cardCtrl.deleteCard(req, res);
 });
 
 module.exports = router;

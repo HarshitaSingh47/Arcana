@@ -4,7 +4,7 @@ module app.admin {
     'use strict';
     
     class AdminCardsController implements IAdminCardsController {
-        cardType: string = 'battery';
+        cardType: string = 'Battery';
         
         static $inject: string[] = ['$modal', 'CardService', 'cards'];
         constructor(private $modal: angular.ui.bootstrap.IModalService, private cardService: ICardService, private cards: ICard[]) { }
@@ -21,7 +21,7 @@ module app.admin {
         }
         
         addCard(): void {
-            this.$modal.open({
+            var modalInstance = this.$modal.open({
                 templateUrl: '/app/admin/cards/adminAddCard.html',
                 controller: 'AdminAddCardController',
                 controllerAs: 'vm',
@@ -31,28 +31,42 @@ module app.admin {
                     }
                 }
             });
+            
+            modalInstance.result.then((result) => {
+                this.loadCards();
+            });
         }
         
         editCard(cardId: string): void {
             this.cardService.getCardById(cardId).then((result) => {
-                this.$modal.open({
-                    templateUrl: '/app/admin/cards/adminEditCard.html',
-                    controller: 'AdminEditCardController',
-                    controllerAs: 'vm',
-                    resolve: {
-                        cardInfo: () => {
-                            return {
-                                card: result,
-                                cardType: this.cardType
-                            };
-                        }
+                this.showEditCard(result);
+            });
+        }
+        
+        showEditCard(card: any): void {
+            var modalInstance = this.$modal.open({
+                templateUrl: '/app/admin/cards/adminEditCard.html',
+                controller: 'AdminEditCardController',
+                controllerAs: 'vm',
+                resolve: {
+                    cardInfo: () => {
+                        return {
+                            card: card,
+                            cardType: this.cardType
+                        };
                     }
-                });
+                }
+            });
+            
+            modalInstance.result.then(() => {
+                this.loadCards();
             });
         }
         
         deleteCard(cardId: string): void {
-            //this.$firebaseObject(this.fbRef.child(this.cardType).child(cardId)).$remove();
+            this.cardService.deleteCard(cardId).then(() => {
+                this.loadCards();
+            });
         }
     }
     

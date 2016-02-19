@@ -18,27 +18,24 @@ module app.admin {
             flavorText: ''
         };
         cardTypes: string[] = ['Creature', 'Battery', 'Modifier', 'Sorcery'];
-        creatureTypes: string[] = ['Organic', 'Mystical'];
         rarities: string[] = ['Normal', 'Uncommon', 'Rare', 'Epic', 'Legendary'];
+        errorMessage: string = '';
         
-        static $inject: string[] = ['$modalInstance', '$firebaseArray', 'FIREBASE_URL', 'cardType'];
-        constructor(private $modalInstance: angular.ui.bootstrap.IModalServiceInstance, private cardType: string) {
+        static $inject: string[] = ['$modalInstance', 'CardService', 'cardType'];
+        constructor(private $modalInstance: angular.ui.bootstrap.IModalServiceInstance, private cardService: ICardService, private cardType: string) {
             this.card.cardType = this.cardType;
         }
         
         submit(): void {
-            /*
-            var cardRef = this.fbRef.child(this.card.cardType.toLowerCase());
-            var card = _.pick(this.card, ['cardName', 'rarity', 'instanceCost', 'maintenanceCost', 'genValue', 'burnValue', 'health', 'power', 'description', 'flavorText']);
-            
-            this.$firebaseArray(cardRef).$add(card).then(() => {
+            this.cardService.createCard(this.card).then((result) => {
                 this.$modalInstance.close();
+            }).catch((errResult) => {
+                this.errorMessage = errResult.data.error;
             });
-            */
         }
         
         cancel(): void {
-            this.$modalInstance.close();
+            this.$modalInstance.dismiss();
         }
     }
     
