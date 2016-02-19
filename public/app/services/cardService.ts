@@ -9,15 +9,21 @@ module app.cardService {
         constructor(private $http: ng.IHttpService) { }
         
         getCards(): ng.IPromise<any> {
-            return this.$http.get(this.apiUrl);
+            return this.$http.get(this.apiUrl).then((results) => {
+                return results.data;
+            });
         }
         
         getCardsByType(cardType: string): ng.IPromise<any> {
-            return this.$http.get(this.apiUrl + 'cardType/' + cardType.toLowerCase());
+            return this.$http.get(`${this.apiUrl}cardType/${cardType}`).then((results) => {
+                return results.data;
+            });
         }
         
         getCardById(cardId: string): ng.IPromise<any> {
-            return this.$http.get(this.apiUrl + 'id/' + cardId);
+            return this.$http.get(`${this.apiUrl}id/${cardId}`).then((results) => {
+                return results.data[0];
+            });
         }
     }
     

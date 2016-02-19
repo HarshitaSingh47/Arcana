@@ -13,15 +13,21 @@ module app.userService {
         }
         
         getUserById(userId: string): ng.IPromise<any> {
-            return this.$http.get(this.apiUrl + 'id/' + userId);
+            return this.$http.get(`${this.apiUrl}id/${userId}`);
+        }
+        
+        getUserByFirebaseId(firebaseId: string): ng.IPromise<any> {
+            return this.$http.get(`${this.apiUrl}firebaseId/${firebaseId}`).then((result) => {
+                return result.data[0];
+            });
         }
         
         getUserByUsername(username: string): ng.IPromise<any> {
-            return this.$http.get(this.apiUrl + 'username/' + username);
+            return this.$http.get(`${this.apiUrl}username/${username}`);
         }
         
         getUserByEmail(emailAddress: string): ng.IPromise<any> {
-            return this.$http.get(this.apiUrl + 'email/' + emailAddress);
+            return this.$http.get(`${this.apiUrl}email/${emailAddress}`);
         }
         
         createUser(user: any): ng.IPromise<any> {

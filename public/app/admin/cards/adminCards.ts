@@ -11,7 +11,7 @@ module app.admin {
         
         loadCards(): void {
             this.cardService.getCardsByType(this.cardType).then((results) => {
-                this.cards = results.data;
+                this.cards = results;
             });
         }
         
@@ -34,7 +34,7 @@ module app.admin {
         }
         
         editCard(cardId: string): void {
-            this.cardService.getCardById(cardId).then((results) => {
+            this.cardService.getCardById(cardId).then((result) => {
                 this.$modal.open({
                     templateUrl: '/app/admin/cards/adminEditCard.html',
                     controller: 'AdminEditCardController',
@@ -42,7 +42,7 @@ module app.admin {
                     resolve: {
                         cardInfo: () => {
                             return {
-                                card: results.data[0],
+                                card: result,
                                 cardType: this.cardType
                             };
                         }

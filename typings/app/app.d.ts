@@ -6,6 +6,7 @@ declare module app {
     
     interface IAppUser {
         uid: string;
+        firebaseId: string;
         username: string;
     }
     
@@ -154,6 +155,7 @@ declare module app {
         
         getUsers(): ng.IPromise<any>;
         getUserById(userId: string): ng.IPromise<any>;
+        getUserByFirebaseId(firebaseId: string): ng.IPromise<any>;
         getUserByUsername(username: string): ng.IPromise<any>;
         getUserByEmail(emailAddress: string): ng.IPromise<any>;
         createUser(user: any): ng.IPromise<any>;

@@ -27,13 +27,15 @@ module app.register {
             // Create user in Firebase
             this.fbAuth.$createUser(model).then((userData) => {
                 // Create user in MongoDB
-                return this.userService.createUser({username: model.username, emailAddress: model.email });
-            }).then(() => {
-                // Log user in
-                return this.fbAuth.$authWithPassword({ email: model.email, password: model.password });
-            }).then(() => {
-                // Redirect to home page
-                this.$location.path('/');
+                this.userService.createUser({firebaseId: userData.uid, username: model.username, emailAddress: model.email }).then(() => {
+                    return this.fbAuth.$authWithPassword({ email: model.email, password: model.password });
+                }).then(() => {
+                    this.$location.path('/');
+                }).catch((error) => {
+                    console.log(error);
+                })
+            }).catch((error) => {
+                console.log(error);
             });
         }
     }
