@@ -4,34 +4,27 @@ module app.userService {
     'use strict';
     
     class UserService implements IUserService {
-        apiUrl: string = '/api/users/';
+        userApiUrl: string = '/api/users/';
+        userProfileApiUrl: string = '/api/userProfiles/';
         
         constructor(private $http: ng.IHttpService) { }
         
-        getUsers(): ng.IPromise<any> {
-            return this.$http.get(this.apiUrl);
-        }
-        
-        getUserById(userId: string): ng.IPromise<any> {
-            return this.$http.get(`${this.apiUrl}id/${userId}`);
-        }
-        
-        getUserByFirebaseId(firebaseId: string): ng.IPromise<any> {
-            return this.$http.get(`${this.apiUrl}firebaseId/${firebaseId}`).then((result) => {
-                return result.data[0];
+        getUserProfileById(userId: string): ng.IPromise<any> {
+            return this.$http.get(this.userProfileApiUrl + userId).then((result) => {
+                return result.data;
             });
         }
         
-        getUserByUsername(username: string): ng.IPromise<any> {
-            return this.$http.get(`${this.apiUrl}username/${username}`);
-        }
-        
-        getUserByEmail(emailAddress: string): ng.IPromise<any> {
-            return this.$http.get(`${this.apiUrl}email/${emailAddress}`);
-        }
-        
         createUser(user: any): ng.IPromise<any> {
-            return this.$http.post(this.apiUrl, user);
+            return this.$http.post(this.userApiUrl, user).then((result) => {
+                return result.data;
+            });
+        }
+        
+        createUserProfile(userProfile: any): ng.IPromise<any> {
+            return this.$http.post(this.userProfileApiUrl, userProfile).then((result) => {
+                return result.data;
+            });
         }
     }
     

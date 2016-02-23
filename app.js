@@ -6,11 +6,9 @@ var express = require('express'),
     routes = require('./routes/index'),
     cardApi = require('./routes/cards'),
     userApi = require('./routes/users'),
-    mongoose = require('mongoose'),
+    userProfileApi = require('./routes/userProfiles'),
     app = express(),
     server = require('http').createServer(app);
-    
-mongoose.connect('mongodb://interneth3ro:jm71cl33@ds061415.mongolab.com:61415/arcana');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -27,6 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/api/cards', cardApi);
 app.use('/api/users', userApi);
+app.use('/api/userProfiles', userProfileApi);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -11,31 +11,32 @@ module app.register {
         password: string;
         errorMessage: string = '';
         
-        static $inject: string[] = ['$firebaseAuth', '$firebaseObject', '$location', 'UserService', 'FIREBASE_URL'];
-        constructor(private $firebaseAuth: AngularFireAuthService, private $firebaseObject: AngularFireObjectService, private $location: ng.ILocationService, private userService: IUserService, private FIREBASE_URL: string) { 
+        static $inject: string[] = ['$firebaseAuth', '$location', 'UserService', 'FIREBASE_URL'];
+        constructor(private $firebaseAuth: AngularFireAuthService, private $location: ng.ILocationService, private userService: IUserService, private FIREBASE_URL: string) { 
             this.fbRef = new Firebase(this.FIREBASE_URL);
             this.fbAuth = this.$firebaseAuth(this.fbRef);
         }
         
         register(): void {
-            var model: IRegisterModel = {
-                email: this.emailAddress,
-                password: this.password,
-                username: this.username
-            };
-            
             // Create user in Firebase
-            this.fbAuth.$createUser(model).then((userData) => {
-                // Create user in MongoDB
-                this.userService.createUser({firebaseId: userData.uid, username: model.username, emailAddress: model.email }).then(() => {
-                    return this.fbAuth.$authWithPassword({ email: model.email, password: model.password });
-                }).then(() => {
-                    this.$location.path('/');
-                }).catch((error) => {
-                    console.log(error);
-                })
-            }).catch((error) => {
-                console.log(error);
+            this.userService.createUser({email: this.emailAddress, password: this.password}).then((userData) => {
+                // Create user profile
+                var userProfile: any = {
+                    uid: userData.uid,
+                    username: this.username,
+                    emailAddress: this.emailAddress
+                };
+                
+                return this.userService.createUserProfile(userProfile);
+            }).then(() => {
+                // Log user in
+                return this.fbAuth.$authWithPassword({ email: this.emailAddress, password: this.password });
+            }).then(() => {
+                // redirect to home page
+                this.$location.path('/');
+            }).catch((errResult) => {
+                //this.errorMessage = errResult.data.error;
+                console.log(errResult);
             });
         }
     }
