@@ -25,14 +25,7 @@
         $routeProvider.when('/admin/cards', {
             templateUrl: '/app/admin/cards/adminCards.html',
             controller: 'AdminCardsController',
-            controllerAs: 'vm',
-            resolve: {
-                cards: ['CardService', (cardService) => {
-                    return cardService.getCardsByType('Battery').then(function (results) {
-                        return results.data;
-                    });
-                }]
-            }
+            controllerAs: 'vm'
         });
     }
     configureRoutes.$inject = ['$routeProvider'];

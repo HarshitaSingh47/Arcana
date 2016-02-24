@@ -4,6 +4,7 @@ module app.admin {
     'use strict';
     
     class AdminAddCardController implements IAdminAddCardController {
+        fbRef: Firebase;
         card: ICard = {
             cardName: '',
             cardType: '',
@@ -21,16 +22,17 @@ module app.admin {
         rarities: string[] = ['Normal', 'Uncommon', 'Rare', 'Epic', 'Legendary'];
         errorMessage: string = '';
         
-        static $inject: string[] = ['$modalInstance', 'CardService', 'cardType'];
-        constructor(private $modalInstance: angular.ui.bootstrap.IModalServiceInstance, private cardService: ICardService, private cardType: string) {
+        static $inject: string[] = ['$modalInstance', '$firebaseArray', 'FIREBASE_URL', 'cardType'];
+        constructor(private $modalInstance: angular.ui.bootstrap.IModalServiceInstance, private $firebaseArray: AngularFireArrayService, private FIREBASE_URL: string, private cardType: string) {
+            this.fbRef = new Firebase(FIREBASE_URL + 'cards');
             this.card.cardType = this.cardType;
         }
         
         submit(): void {
-            this.cardService.createCard(this.card).then((result) => {
+            this.$firebaseArray(this.fbRef).$add(this.card).then(() => {
                 this.$modalInstance.close();
             }).catch((errResult) => {
-                this.errorMessage = errResult.data.error;
+                this.errorMessage = errResult;
             });
         }
         

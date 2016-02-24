@@ -303,6 +303,7 @@ interface AngularFireArray extends Array<AngularFireSimpleObject> {
 	$destroy(): void;
 }
 interface AngularFireArrayService {
+    (query: FirebaseQuery): AngularFireArray;
 	(firebase: Firebase): AngularFireArray;
 	$extend(ChildClass: Object, methods?: Object): Object;
 }

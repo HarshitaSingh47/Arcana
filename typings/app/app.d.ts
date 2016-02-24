@@ -108,20 +108,19 @@ declare module app {
     }
     
     interface IAdminCardsController {
+        fbRef: Firebase;
         cardType: string;
+        cards: any;
         
         loadCards(): void;
         showCards(cardType: string): void;
         addCard(): void;
         editCard(cardId: string): void;
-        showEditCard(card: any): void;
         deleteCard(cardId: string): void;
     }
     
     interface IAdminEditCardController {
-        card: ICard;
-        cardType: string;
-        title: string;
+        card: AngularFireObject;
         rarities: string[];
         
         submit(): void;

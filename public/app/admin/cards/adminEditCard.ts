@@ -4,23 +4,19 @@ module app.admin {
     'use strict';
     
     class AdminEditCardController implements IAdminEditCardController {
-        card: ICard;
-        cardType: string;
-        title: string;
+        fbRef: Firebase;
+        card: AngularFireObject;
         rarities: string[] = ['Normal', 'Uncommon', 'Rare', 'Epic', 'Legendary'];
         
-        static $inject: string[] = ['$modalInstance', 'CardService', 'cardInfo'];
-        constructor(private $modalInstance: angular.ui.bootstrap.IModalServiceInstance, private cardService: ICardService, private cardInfo: any) {
-            this.card = cardInfo.card;
-            this.cardType = cardInfo.cardType;
-            this.title = `Update Card - ${this.card.cardName}`;
+        static $inject: string[] = ['$modalInstance', '$firebaseObject', 'FIREBASE_URL', 'cardId'];
+        constructor(private $modalInstance: angular.ui.bootstrap.IModalServiceInstance, private $firebaseObject: AngularFireObjectService, private FIREBASE_URL: string, private cardId: string) {
+            this.fbRef = new Firebase(FIREBASE_URL + '/cards/' + cardId);
+            this.card = $firebaseObject(this.fbRef);
         }
         
         submit(): void {
-            this.cardService.updateCard(this.card).then((result) => {
+            this.card.$save().then(() => {
                 this.$modalInstance.close();
-            }).catch((errResult) => {
-                console.log(errResult);
             });
         }
         
