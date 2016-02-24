@@ -119,6 +119,14 @@ declare module app {
         deleteCard(cardId: string): void;
     }
     
+    interface IAdminDecksController {
+        fbRef: Firebase;
+        
+        loadDecks(): void;
+        addDeck(): void;
+        editDeck(deckId: string): void;
+    }
+    
     interface IAdminEditCardController {
         card: AngularFireObject;
         rarities: string[];
