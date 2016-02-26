@@ -18,7 +18,7 @@
                                 <th>Pack Name</th>
                                 <th>Pack Type</th>
                                 <th>Card Count</th>
-                                <th>Cost<th>
+                                <th>Cost</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -28,11 +28,10 @@
                             </tr>
                             <tr data-ng-repeat="pack in vm.packs">
                                 <td>{{ pack.packName }}</td>
-                                <td>{{ pack.packType }}
+                                <td>{{ pack.packType }}</td>
                                 <td>{{ pack.cardCount }}</td>
                                 <td>{{ pack.cost }}</td>
                                 <td>
-                                    <a class="label label-primary" href="#/admin/packs/edit/{{ pack.$id }}">Edit</a> |
                                     <a class="label label-danger" data-ng-click="vm.deletePack(pack.$id)">Delete</a>
                                 </td>
                             </tr>

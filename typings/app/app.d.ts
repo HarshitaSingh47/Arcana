@@ -24,6 +24,14 @@ declare module app {
         label?: string;
     }
     
+    interface IPack {
+        packName: string;
+        packType: string;
+        cardCount: number;
+        cards: ICard[];
+        cost: number
+    }
+    
     interface ILoginController {
         fbRef: Firebase;
         fbAuth: AngularFireAuth;

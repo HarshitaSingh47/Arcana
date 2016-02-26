@@ -39,17 +39,6 @@
             controller: 'AdminAddPackController',
             controllerAs: 'vm'
         });
-        
-        $routeProvider.when('/admin/packs/edit/:packId', {
-            templateUrl: '/app/admin/packs/adminEditPack.html',
-            controller: 'AdminEditPackController',
-            controllerAs: 'vm',
-            resolve: {
-                packId: ['$route', ($route: ng.route.IRouteService) => {
-                    return $route.current.params.packId;
-                }]
-            }
-        });
     }
     configureRoutes.$inject = ['$routeProvider'];
     
