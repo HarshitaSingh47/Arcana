@@ -3,7 +3,7 @@
 module app.admin {
     'use strict';
     
-    class AdminDecksController implements IAdminDecksController {
+    class AdminPacksController implements IAdminPacksController {
         fbRef: Firebase;
         decks: AngularFireArray;
         
@@ -13,18 +13,18 @@ module app.admin {
             this.decks = this.$firebaseArray(this.fbRef);
         }
         
-        loadDecks(): void {
+        loadPacks(): void {
             
         }
         
-        addDeck(): void {
+        addPack(): void {
             
         }
         
-        editDeck(): void {
+        editPack(): void {
             
         }
     }
     
-    angular.module('app.controllers').controller('AdminDecksController', AdminDecksController);
+    angular.module('app.controllers').controller('AdminPacksController', AdminPacksController);
 }

@@ -119,12 +119,12 @@ declare module app {
         deleteCard(cardId: string): void;
     }
     
-    interface IAdminDecksController {
+    interface IAdminPacksController {
         fbRef: Firebase;
         
-        loadDecks(): void;
-        addDeck(): void;
-        editDeck(deckId: string): void;
+        loadPacks(): void;
+        addPack(): void;
+        editPack(packId: string): void;
     }
     
     interface IAdminEditCardController {
