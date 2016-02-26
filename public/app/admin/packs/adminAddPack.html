@@ -2,27 +2,43 @@
     <div class="page">
         <section class="panel panel-default">
             <div class="panel-heading">
-                <strong>Add New Deck</strong>
+                <strong>Add New Pack</strong>
             </div>
             <div class="panel-body">
                 <div class="row">
                     <form role="form" data-ng-submit="vm.submit()" novalidate>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="deckName">Deck Name</label>
-                                <input type="text" class="form-control" id="deckName" name="deckName" data-ng-model="vm.deckName" placeholder="Enter Deck Name..." />
+                                <label for="packName">Pack Name</label>
+                                <input type="text" class="form-control" id="deckName" name="deckName" data-ng-model="vm.pack.packName" placeholder="Enter Pack Name..." />
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="packType">Pack Type</label>
+                                <select class="form-control" id="packType" name="packType" data-ng-model="vm.pack.packType">
+                                    <option value="Booster">Booster</option>
+                                    <option value="Prebuilt Deck">Prebuilt Deck</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="cost">Cost</label>
+                                <input type="text" class="form-control" id="cost" name="cost" data-ng-model="vm.pack.cost" />
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group col-md-3 no-left-padding">
                                 <label for="batteryCardList">Add Battery Card</label>
+                                <a class="pull-right" style="cursor: pointer;" data-ng-click="vm.addAllCards('Battery')">Add All</a>
                                 <select class="form-control" id="batteryCardList" name="batteryCardList" multiple data-ng-options="bCard.$id as bCard.label for bCard in vm.batteryCards track by bCard.$id" data-ng-model="vm.selectedBatteryCards" data-ng-dblclick="vm.addCard('Battery')"></select>
                                 <div class="panel panel-default push-down-10">
                                     <div class="panel-heading">
                                         <strong>Battery Cards</strong>
                                     </div>
                                     <ul class="list-group">
-                                        <li class="list-group-item" data-ng-repeat="card in vm.deckCards | filter: { cardType: 'Battery' }">
+                                        <li class="list-group-item" data-ng-repeat="card in vm.pack.cards | filter: { cardType: 'Battery' }">
                                             <a class="badge badge-danger" data-ng-click="vm.removeCard(card.$id)"><i class="ti-close"></i></a>
                                             {{ card.label }}
                                         </li>
@@ -31,13 +47,14 @@
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="creatureCardList">Add Creature Card</label>
+                                <a class="pull-right" style="cursor: pointer;" data-ng-click="vm.addAllCards('Creature')">Add All</a>
                                 <select class="form-control" id="creatureCardList" name="creatureCardList" multiple data-ng-options="cCard.$id as cCard.label for cCard in vm.creatureCards track by cCard.$id" data-ng-model="vm.selectedCreatureCards" data-ng-dblclick="vm.addCard('Creature')"></select>
                                 <div class="panel panel-default push-down-10">
                                     <div class="panel-heading">
                                         <strong>Creature Cards</strong>
                                     </div>
                                     <ul class="list-group">
-                                        <li class="list-group-item" data-ng-repeat="card in vm.deckCards | filter: { cardType: 'Creature' }">
+                                        <li class="list-group-item" data-ng-repeat="card in vm.pack.cards | filter: { cardType: 'Creature' }">
                                             <a class="badge badge-danger" data-ng-click="vm.removeCard(card.$id)"><i class="ti-close"></i></a>
                                             {{ card.label }}
                                         </li>
@@ -46,13 +63,14 @@
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="sorceryCardList">Add Sorcery Card</label>
+                                <a class="pull-right" style="cursor: pointer;" data-ng-click="vm.addAllCards('Sorcery')">Add All</a>
                                 <select class="form-control" id="sorceryCardList" name="sorceryCardList" multiple data-ng-options="sCard.$id as sCard.label for sCard in vm.sorceryCards track by sCard.$id" data-ng-model="vm.selectedSorceryCards" data-ng-dblclick="vm.addCard('Sorcery')"></select>
                                 <div class="panel panel-default push-down-10">
                                     <div class="panel-heading">
                                         <strong>Sorcery Cards</strong>
                                     </div>
                                     <ul class="list-group">
-                                        <li class="list-group-item" data-ng-repeat="card in vm.deckCards | filter: { cardType: 'Sorcery' }">
+                                        <li class="list-group-item" data-ng-repeat="card in vm.pack.cards | filter: { cardType: 'Sorcery' }">
                                             <a class="badge badge-danger" data-ng-click="vm.removeCard(card.$id)"><i class="ti-close"></i></a>
                                             {{ card.label }}
                                         </li>
@@ -61,13 +79,14 @@
                             </div>
                             <div class="form-group col-md-3 no-right-padding">
                                 <label for="modifierCardList">Add Modifier Card</label>
+                                <a class="pull-right" style="cursor: pointer;" data-ng-click="vm.addAllCards('Modifier')">Add All</a>
                                 <select class="form-control" id="modifierCardList" name="modifierCardList" multiple data-ng-options="mCard.$id as mCard.label for mCard in vm.modifierCards track by mCard.$id" data-ng-model="vm.selectedModifierCards" data-ng-dblclick="vm.addCard('Modifier')"></select>
                                 <div class="panel panel-default push-down-10">
                                     <div class="panel-heading">
                                         <strong>Modifier Cards</strong>
                                     </div>
                                     <ul class="list-group">
-                                        <li class="list-group-item" data-ng-repeat="card in vm.deckCards | filter: { cardType: 'Modifier' }">
+                                        <li class="list-group-item" data-ng-repeat="card in vm.pack.cards | filter: { cardType: 'Modifier' }">
                                             <a class="badge badge-danger" data-ng-click="vm.removeCard(card.$id)"><i class="ti-close"></i></a>
                                             {{ card.label }}
                                         </li>
@@ -77,7 +96,7 @@
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary" data-ng-disabled="!vm.deckName || !vm.deckCards.length">Add Deck</button> &nbsp;
+                                <button type="submit" class="btn btn-primary">Add Pack</button> &nbsp;
                                 <input type="button" class="btn btn-default" value="Cancel" data-ng-click="vm.cancel()" />
                             </div>
                         </div>

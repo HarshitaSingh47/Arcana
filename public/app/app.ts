@@ -27,6 +27,29 @@
             controller: 'AdminCardsController',
             controllerAs: 'vm'
         });
+        
+        $routeProvider.when('/admin/packs', {
+            templateUrl: '/app/admin/packs/adminPacks.html',
+            controller: 'AdminPacksController',
+            controllerAs: 'vm'
+        });
+        
+        $routeProvider.when('/admin/packs/add', {
+            templateUrl: '/app/admin/packs/adminAddPack.html',
+            controller: 'AdminAddPackController',
+            controllerAs: 'vm'
+        });
+        
+        $routeProvider.when('/admin/packs/edit/:packId', {
+            templateUrl: '/app/admin/packs/adminEditPack.html',
+            controller: 'AdminEditPackController',
+            controllerAs: 'vm',
+            resolve: {
+                packId: ['$route', ($route: ng.route.IRouteService) => {
+                    return $route.current.params.packId;
+                }]
+            }
+        });
     }
     configureRoutes.$inject = ['$routeProvider'];
     
@@ -50,6 +73,7 @@
     ])
     .constant('FIREBASE_URL', 'https://glaring-heat-7532.firebaseio.com/')
     .constant('CARD_TYPES', ['$id', 'cardName', 'cardType', 'label', 'genValue', 'instanceCost', 'maintenanceCost', 'burnValue', 'health', 'power', 'rarity', 'description', 'flavorText', 'creatureType'])
+    .constant('PACK_TYPES', ['Booster', 'Prebuilt Deck'])
     .config(configureRoutes)
     .run(onAppRun);
 })();

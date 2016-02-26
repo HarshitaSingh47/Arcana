@@ -5,24 +5,27 @@ module app.admin {
     
     class AdminPacksController implements IAdminPacksController {
         fbRef: Firebase;
-        decks: AngularFireArray;
+        packType: string = 'All';
+        packs: AngularFireArray;
         
         static $inject: string[] = ['$firebaseArray', '$firebaseObject', 'FIREBASE_URL'];
         constructor(private $firebaseArray: AngularFireArrayService, private $firebaseObject: AngularFireObjectService, private FIREBASE_URL: string) {
-            this.fbRef = new Firebase(FIREBASE_URL + 'decks');
-            this.decks = this.$firebaseArray(this.fbRef);
+            this.fbRef = new Firebase(FIREBASE_URL + 'packs');
+            this.loadPacks();
         }
         
         loadPacks(): void {
-            
+            var query = (this.packType === 'All') ? this.fbRef : this.fbRef.orderByChild('packType').equalTo(this.packType);
+            this.packs = this.$firebaseArray(query);
         }
         
-        addPack(): void {
-            
+        showPacks(packType: string): void {
+            this.packType = packType;
+            this.loadPacks();
         }
         
-        editPack(): void {
-            
+        deletePack(packId: string): void {
+            this.$firebaseObject(this.fbRef.child(packId)).$remove();
         }
     }
     

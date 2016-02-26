@@ -21,6 +21,7 @@ declare module app {
         power: number;
         description: string;
         flavorText: string;
+        label?: string;
     }
     
     interface ILoginController {
@@ -123,8 +124,8 @@ declare module app {
         fbRef: Firebase;
         
         loadPacks(): void;
-        addPack(): void;
-        editPack(packId: string): void;
+        showPacks(packType: string): void;
+        deletePack(packId: string): void;
     }
     
     interface IAdminEditCardController {
