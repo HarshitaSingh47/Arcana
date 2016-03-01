@@ -6,27 +6,17 @@ module app.header {
     class HeaderController implements IHeaderController {
         fbRef: Firebase;
         fbAuth: AngularFireAuth;
-        currentUser: IAppUser;
+        currentUser: AngularFireObject;
         fbUser: FirebaseAuthData;
         
-        static $inject: string[] = ['$firebaseAuth', 'UserService', 'FIREBASE_URL'];
-        constructor(private $firebaseAuth: AngularFireAuthService, private userService: IUserService, private FIREBASE_URL: string) {
+        static $inject: string[] = ['$firebaseObject', '$firebaseAuth', 'UserService', 'FIREBASE_URL'];
+        constructor(private $firebaseObject: AngularFireObjectService, private $firebaseAuth: AngularFireAuthService, private userService: IUserService, private FIREBASE_URL: string) {
             this.fbRef = new Firebase(FIREBASE_URL);
             this.fbAuth = $firebaseAuth(this.fbRef);
             
             this.fbAuth.$onAuth((authData) => {
                 if (authData) {
-                    this.userService.getUserProfileById(authData.uid).then((result) => {
-                        if (result) {
-                            this.currentUser = {
-                                username: result.username,
-                                uid: authData.uid,
-                                credits: result.credits
-                            };
-                        } else {
-                            this.currentUser = undefined;
-                        }
-                    });
+                    this.currentUser = this.$firebaseObject(this.fbRef.child('userProfiles').child(authData.uid));
                 } else {
                     this.currentUser = undefined;
                 }

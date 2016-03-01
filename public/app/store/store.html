@@ -1,1 +1,77 @@
-Store
+<div class="page">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <span class="glyphicon glyphicon-th"></span>
+            Prebuilt Decks
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-3 col-xsm-6" data-ng-repeat="pack in vm.prebuiltDecks">
+                    <section class="pricing-table" data-ng-class="{ 'ui-ribbon-container ui-ribbon-success': vm.hasPurchased(pack.$id) }">
+                        <div class="ui-ribbon-wrapper" data-ng-show="vm.hasPurchased(pack.$id)">
+                            <div class="ui-ribbon">
+                                <small>Purchased</small>
+                            </div>
+                        </div>
+                        <header>{{ pack.packName }}</header>
+                        <div class="pricing-body">
+                            <div class="pricing-price">
+                                <strong>
+                                    <span>{{ pack.cardCount }}</span>
+                                    <sub>cards</sub>
+                                </strong>
+                                <hr class="hr-colored" />
+                                <p class="subtitle">Contains a pre-built deck ready for immediate play!</p>
+                            </div>
+                            <ul>
+                                <li><strong>{{ pack.batteryCardCount }}</strong> Battery cards</li>
+                                <li><strong>{{ pack.creatureCardCount }}</strong> Creature cards</li>
+                            </ul>
+                        </div>
+                        <footer>
+                            <button data-ng-click="vm.purchaseItem(pack)" class="btn btn-success btn-w-lg" data-ng-disabled="vm.hasPurchased(pack.$id)" data-ng-class="{ 'btn-disabled': vm.hasPurchased(pack.$id) }">Get it now</button>
+                            <button data-ng-click="vm.previewItem(pack.$id)" class="btn btn-info btn-w-lg">Preview</button>
+                        </footer>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <span class="glyphicon glyphicon-th"></span>
+            Booster Packs
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-3 col-xsm-6" data-ng-repeat="pack in vm.boosterPacks">
+                    <section class="pricing-table" data-ng-class="{ 'ui-ribbon-container ui-ribbon-success': vm.hasPurchased(pack.$id) }">
+                        <div class="ui-ribbon-wrapper" data-ng-show="vm.hasPurchased(pack.$id)">
+                            <div class="ui-ribbon">
+                                <small>Purchased</small>
+                            </div>
+                        </div>
+                        <header>{{ pack.packName }}</header>
+                        <div class="pricing-body">
+                            <div class="pricing-price">
+                                <strong>
+                                    <span>{{ pack.cardCount }}</span>
+                                    <sub>cards</sub>
+                                </strong>
+                                <hr class="hr-colored" />
+                                <p class="subtitle">Contains a random selection of Battery, Creature, Modifier, or Sorcery cards</p>
+                            </div>
+                            <ul>
+                                <li>At least <strong>1</strong> or more battery cards</li>
+                                <li>At least <strong>6</strong> or more creature cards</li>
+                            </ul>
+                        </div>
+                        <footer>
+                            <button data-ng-click="vm.purchaseItem(pack)" class="btn btn-success btn-w-lg" data-ng-disabled="vm.hasPurchased(pack.$id)" data-ng-class="{ 'btn-disabled': vm.hasPurchased(pack.$id) }">Get it now</button>
+                        </footer>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

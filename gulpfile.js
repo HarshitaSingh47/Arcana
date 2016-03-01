@@ -72,7 +72,7 @@ gulp.task('compile-ts', function () {
                       .pipe(gulp.dest('public/js'));
 });
 
-gulp.task('recompile', ['ts-lint', 'compile-ts', 'core-css']);
+gulp.task('recompile', ['ts-lint', 'compile-ts', 'vendor-css', 'core-css']);
 
 gulp.task('watch', function () {
     gulp.watch(['./public/app/**/*.ts'], ['ts-lint', 'compile-ts']);

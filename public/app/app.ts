@@ -22,6 +22,12 @@
             controllerAs: 'vm'
         });
         
+        $routeProvider.when('/store', {
+            templateUrl: '/app/store/store.html',
+            controller: 'StoreController',
+            controllerAs: 'vm'
+        });
+        
         $routeProvider.when('/admin/cards', {
             templateUrl: '/app/admin/cards/adminCards.html',
             controller: 'AdminCardsController',

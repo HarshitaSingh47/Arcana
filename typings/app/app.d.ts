@@ -95,7 +95,7 @@ declare module app {
     interface IHeaderController {
         fbRef: Firebase;
         fbAuth: AngularFireAuth;
-        currentUser: IAppUser;
+        currentUser: AngularFireObject;
         fbUser: FirebaseAuthData;
         
         logout(): void;
@@ -103,9 +103,10 @@ declare module app {
     
     interface IStoreController {
         fbRef: Firebase;
-        currentUser: IAppUser;
-        
-        activate(): void;
+        currentUser: AngularFireObject;
+        fbUser: FirebaseAuthData;
+        boosterPacks: AngularFireArray;
+        prebuiltDecks: AngularFireArray;
     }
     
     interface IAdminAddCardController {
@@ -143,18 +144,6 @@ declare module app {
         
         submit(): void;
         cancel(): void;
-    }
-    
-    interface IAuthService {
-        fbRef: Firebase;
-        fbAuth: AngularFireAuth;
-        
-        login(model: ILoginModel): ng.IPromise<any>;
-        logout(): void;
-        register(userInfo): ng.IPromise<any>;
-        waitForAuth(): ng.IPromise<any>;
-        requireAuth(): ng.IPromise<any>;
-        getAuth(): FirebaseAuthData;
     }
     
     interface ICardService {
