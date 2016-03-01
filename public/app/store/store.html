@@ -17,8 +17,8 @@
                         <div class="pricing-body">
                             <div class="pricing-price">
                                 <strong>
-                                    <span>{{ pack.cardCount }}</span>
-                                    <sub>cards</sub>
+                                    <span>{{ pack.cost }}</span>
+                                    <sub>credits</sub>
                                 </strong>
                                 <hr class="hr-colored" />
                                 <p class="subtitle">Contains a pre-built deck ready for immediate play!</p>
@@ -29,7 +29,7 @@
                             </ul>
                         </div>
                         <footer>
-                            <button data-ng-click="vm.purchaseItem(pack)" class="btn btn-success btn-w-lg" data-ng-disabled="vm.hasPurchased(pack.$id)" data-ng-class="{ 'btn-disabled': vm.hasPurchased(pack.$id) }">Get it now</button>
+                            <button data-ng-click="vm.purchaseItem(pack)" class="btn btn-success btn-w-lg" data-ng-disabled="vm.hasPurchased(pack) || !vm.canPurchase(pack)" data-ng-class="{ 'btn-disabled': vm.hasPurchased(pack) || !vm.canPurchase(pack) }">Get it now</button>
                             <button data-ng-click="vm.previewItem(pack.$id)" class="btn btn-info btn-w-lg">Preview</button>
                         </footer>
                     </section>
@@ -55,8 +55,8 @@
                         <div class="pricing-body">
                             <div class="pricing-price">
                                 <strong>
-                                    <span>{{ pack.cardCount }}</span>
-                                    <sub>cards</sub>
+                                    <span>{{ pack.cost }}</span>
+                                    <sub>credits</sub>
                                 </strong>
                                 <hr class="hr-colored" />
                                 <p class="subtitle">Contains a random selection of Battery, Creature, Modifier, or Sorcery cards</p>
@@ -67,7 +67,7 @@
                             </ul>
                         </div>
                         <footer>
-                            <button data-ng-click="vm.purchaseItem(pack)" class="btn btn-success btn-w-lg" data-ng-disabled="vm.hasPurchased(pack.$id)" data-ng-class="{ 'btn-disabled': vm.hasPurchased(pack.$id) }">Get it now</button>
+                            <button data-ng-click="vm.purchaseItem(pack)" class="btn btn-success btn-w-lg" data-ng-disabled="vm.hasPurchased(pack) || !vm.canPurchase(pack)" data-ng-class="{ 'btn-disabled': vm.hasPurchased(pack) || !vm.canPurchase(pack) }">Get it now</button>
                         </footer>
                     </section>
                 </div>

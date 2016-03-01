@@ -5,7 +5,7 @@ module app.store {
     
     class StoreController implements IStoreController {
         fbRef: Firebase;
-        currentUser: AngularFireObject;
+        currentUser: any;
         fbUser: FirebaseAuthData;
         boosterPacks: AngularFireArray;
         prebuiltDecks: AngularFireArray;
@@ -36,6 +36,8 @@ module app.store {
             };
             
             this.purchases.$add(purchase).then(() => {
+                this.currentUser.credits -= item.cost;
+                this.currentUser.$save();
                 this.purchasedItemIds.push(item.$id);
             });
         }
@@ -46,6 +48,10 @@ module app.store {
         
         hasPurchased(itemId: string): boolean {
             return _.contains(this.purchasedItemIds, itemId);
+        }
+        
+        canPurchase(item: any): boolean {
+            return this.currentUser.credits >= item.cost;
         }
     }
     
