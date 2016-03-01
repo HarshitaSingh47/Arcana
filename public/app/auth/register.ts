@@ -24,7 +24,8 @@ module app.register {
                 var userProfile: any = {
                     uid: userData.uid,
                     username: this.username,
-                    emailAddress: this.emailAddress
+                    emailAddress: this.emailAddress,
+                    credits: 10000
                 };
                 
                 return this.userService.createUserProfile(userProfile);

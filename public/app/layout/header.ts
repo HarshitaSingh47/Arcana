@@ -20,7 +20,8 @@ module app.header {
                         if (result) {
                             this.currentUser = {
                                 username: result.username,
-                                uid: authData.uid
+                                uid: authData.uid,
+                                credits: result.credits
                             };
                         } else {
                             this.currentUser = undefined;

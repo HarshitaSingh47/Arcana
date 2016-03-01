@@ -13,7 +13,9 @@ exports.getById = function (req, res, id) {
 exports.createUserProfile = function (req, res) {
     fbRef.child(req.body.uid).set({
         username: req.body.username,
-        emailAddress: req.body.emailAddress
+        emailAddress: req.body.emailAddress,
+        credits: req.body.credits,
+        purchasedItems: []
     }, function (error) {
         if (error) {
             res.status(500).json({error: error});

@@ -9,3 +9,9 @@
 .push-down-10 {
     margin-top: 10px;
 }
+
+.store-credit-badge {
+    position: relative!important;
+    top: 0px!important;
+    right: 0px!important;
+}

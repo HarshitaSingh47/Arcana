@@ -7,6 +7,7 @@ declare module app {
     interface IAppUser {
         uid: string;
         username: string;
+        credits: number;
     }
     
     interface ICard {
